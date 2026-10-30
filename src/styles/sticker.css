@@ -1,0 +1,113 @@
+/* El sticker de la app (StickerAve, 160 × 205): 1 unidad del diseño = 0.625cqw. */
+@layer components {
+  .sticker {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 160 / 205;
+    container-type: inline-size;
+  }
+
+  .sticker__card {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border-radius: 8.75cqw;
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(20 48 47 / 0.2), 0 4px 10px rgb(20 48 47 / 0.08);
+  }
+
+  .sticker__plate {
+    position: absolute;
+    left: 4.375cqw;
+    top: 4.375cqw;
+    width: 91.25cqw;
+    height: 91.25cqw;
+    overflow: hidden;
+    border-radius: 6.25cqw;
+    background: var(--tint);
+  }
+
+  .sticker__plate img {
+    position: absolute;
+    left: 3.125cqw;
+    top: 3.125cqw;
+    width: 85cqw;
+    height: 85cqw;
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sticker__number {
+    position: absolute;
+    left: 3.75cqw;
+    top: 3.75cqw;
+    padding: 0.625cqw 4.375cqw;
+    border-radius: 999px;
+    background: #fff;
+    color: #14302f;
+    font-size: 6.875cqw;
+    line-height: 8.75cqw;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sticker__name {
+    position: absolute;
+    left: 5cqw;
+    top: 97.5cqw;
+    width: 90cqw;
+    height: 27.5cqw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #14302f;
+    font-size: 8.125cqw;
+    line-height: 9.375cqw;
+    font-weight: 700;
+  }
+
+  /* En sombra: el hueco del álbum, impreso y sin sombra. */
+  .sticker--empty .sticker__card {
+    background: var(--surface);
+    box-shadow: none;
+    border: 1.5px dashed var(--edge);
+  }
+
+  .sticker--empty .sticker__plate {
+    background: var(--surface-2);
+  }
+
+  .sticker--empty .sticker__plate img {
+    filter: brightness(0) opacity(0.17);
+  }
+
+  .sticker--empty .sticker__number {
+    background: rgb(255 255 255 / 0.75);
+    color: var(--ink-2);
+  }
+
+  .sticker--empty .sticker__name {
+    color: var(--ink-2);
+  }
+
+  :root[data-theme='dark'] .sticker--empty .sticker__plate img {
+    filter: brightness(0) invert(1) opacity(0.3);
+  }
+
+  :root[data-theme='dark'] .sticker--empty .sticker__number {
+    background: var(--surface-2);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .sticker--empty .sticker__plate img {
+      filter: brightness(0) invert(1) opacity(0.3);
+    }
+
+    :root:not([data-theme='light']) .sticker--empty .sticker__number {
+      background: var(--surface-2);
+    }
+  }
+}

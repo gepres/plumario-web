@@ -1,0 +1,34 @@
+---
+import Logo from './Logo.astro';
+---
+
+<footer class="site-footer">
+  <a href="/" class="site-footer__brand">
+    <Logo class="h-8 w-auto" />
+    <span>Plumario</span>
+  </a>
+  <p>Álbum de aves del Perú, edición Ica. Ilustraciones de Plumario; categorías de conservación de la UICN.</p>
+</footer>
+
+<style>
+  .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    padding: 1.75rem var(--gutter);
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+  }
+
+  .site-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: var(--ink);
+  }
+</style>

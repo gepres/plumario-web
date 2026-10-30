@@ -1,0 +1,231 @@
+@layer components {
+  .album {
+    padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
+    background: var(--surface);
+  }
+
+  .album__head .lead {
+    margin-top: 1.25rem;
+  }
+
+  .album__count {
+    margin-top: 1rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .album__filters {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+  }
+
+  .album__search input,
+  .album__select select {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0 0.875rem;
+    border: 1.5px solid var(--edge);
+    border-radius: 0.75rem;
+    background: var(--page);
+    color: var(--ink);
+    font-size: 1rem;
+  }
+
+  .album__search input::placeholder {
+    color: var(--ink-2);
+  }
+
+  .album__results {
+    min-height: 1.5em;
+    margin-top: 0.75rem;
+    color: var(--ink-2);
+  }
+
+  .album__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7.25rem, 1fr));
+    gap: 0.875rem 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Sin filtros se muestra una muestra corta; el resto no se pinta hasta abrirlo. */
+  .js .album__grid[data-collapsed] li:nth-child(n + 25) {
+    display: none;
+  }
+
+  .album__grid li {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 12rem;
+  }
+
+  .album__grid li[hidden] {
+    display: none;
+  }
+
+  .album__bird {
+    position: relative;
+    display: block;
+    width: 100%;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .album__bird:hover {
+    transform: translateY(-3px) rotate(-1.5deg);
+  }
+
+  .album__mark {
+    position: absolute;
+    right: -0.25rem;
+    top: -0.25rem;
+    display: none;
+    width: 1.625rem;
+    height: 1.625rem;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: var(--sun);
+  }
+
+  .album__mark::after {
+    content: '';
+    position: absolute;
+    left: 0.4375rem;
+    top: 0.1875rem;
+    width: 0.4375rem;
+    height: 0.75rem;
+    border: solid #2d2e16;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .album__bird[data-seen] .album__mark {
+    display: block;
+  }
+
+  .album__more {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .album__more[hidden] {
+    display: none;
+  }
+
+  .bird-dialog {
+    margin: auto;
+    width: min(92vw, 44rem);
+    max-height: 90svh;
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 0;
+    border-radius: 1.25rem;
+    background: var(--page);
+    color: var(--ink);
+  }
+
+  .bird-dialog::backdrop {
+    background: rgb(10 20 15 / 0.6);
+  }
+
+  .bird-dialog[open] {
+    display: grid;
+  }
+
+  .bird-dialog__art {
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+  }
+
+  .bird-dialog__art img {
+    width: min(100%, 15rem);
+    height: auto;
+  }
+
+  .bird-dialog__body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+
+  .bird-dialog__body h3 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .bird-dialog__body .scientific {
+    margin-top: 0.25rem;
+    font-size: 1.3125rem;
+    color: var(--ink-2);
+  }
+
+  .bird-dialog__body dl {
+    display: grid;
+    gap: 0.375rem;
+    margin-top: 1rem;
+  }
+
+  .bird-dialog__body dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.375rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bird-dialog__body dt {
+    color: var(--ink-2);
+  }
+
+  .bird-dialog__body dd {
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .bird-dialog__note {
+    min-height: 1.5em;
+    margin-top: 0.75rem;
+    color: var(--ink-2);
+  }
+
+  .bird-dialog__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .bird-dialog__close {
+    min-height: 3.25rem;
+    padding: 0 0.75rem;
+    font-weight: 700;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .bird-dialog__close:hover {
+    color: var(--ink);
+  }
+
+  @media (min-width: 40rem) {
+    .album__filters {
+      grid-template-columns: minmax(0, 1fr) 13rem 10rem;
+    }
+
+    .bird-dialog[open] {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+
+    .album__grid {
+      grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr));
+      gap: 1.25rem 1rem;
+    }
+  }
+}

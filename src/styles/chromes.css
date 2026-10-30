@@ -1,0 +1,311 @@
+/* Acabados de sticker-finishes.ts de la app. Son de material: no cambian con el tema. */
+@layer components {
+  .chromes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
+    background: radial-gradient(circle at 72% 40%, #375a3b 0%, #13271d 64%);
+    color: #f1f5eb;
+    overflow: clip;
+  }
+
+  /* En móvil el cromo va antes de las opciones, para ver el cambio al elegir una. */
+  .chromes__copy {
+    display: contents;
+  }
+
+  .chromes__stage {
+    order: 1;
+  }
+
+  .chromes__options {
+    order: 2;
+    display: grid;
+    gap: 0.25rem;
+    max-width: 34rem;
+  }
+
+  .chromes .section-title {
+    font-size: clamp(2.25rem, 4.6vw, 4rem);
+  }
+
+  .chromes .lead {
+    color: #dcebd3;
+  }
+
+  .chrome-option {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.875rem;
+    min-height: 3.5rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .chrome-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .chrome-option:hover {
+    background: rgb(255 255 255 / 0.06);
+  }
+
+  .chrome-option:has(input:checked) {
+    background: rgb(255 255 255 / 0.14);
+  }
+
+  .chrome-option:has(input:focus-visible) {
+    outline: 3px solid #e3c45e;
+    outline-offset: 2px;
+  }
+
+  .chrome-option__swatch {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgb(255 255 255 / 0.85);
+  }
+
+  .chrome-option__swatch[data-swatch='holographic'] {
+    background: conic-gradient(from 210deg, #f4c6d6, #c5d9f5, #c3eedc, #f2eab8, #dec8f2, #f4c6d6);
+  }
+
+  .chrome-option__swatch[data-swatch='silver'] {
+    background: linear-gradient(135deg, #f2f4f6, #8f9ba4 50%, #e9edf0);
+  }
+
+  .chrome-option__swatch[data-swatch='gold'] {
+    background: linear-gradient(135deg, #fff4c9, #b9872a 50%, #f5d987);
+  }
+
+  .chrome-option__swatch[data-swatch='ruby'] {
+    background: linear-gradient(135deg, #e37a8c, #7a1226 50%, #c9566a);
+  }
+
+  .chrome-option__swatch[data-swatch='diamond'] {
+    background: conic-gradient(from 22deg, #f7fcff, #b5d2e2, #fff, #a9c8da, #f7fcff);
+  }
+
+  .chrome-option__text {
+    display: grid;
+    line-height: 1.25;
+  }
+
+  .chrome-option__text strong {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+  }
+
+  .chrome-option__text span {
+    color: #dcebd3;
+    font-size: 0.9375rem;
+  }
+
+  .chrome-option__count {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.25rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chromes__stage {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 1.5rem;
+    perspective: 1100px;
+    touch-action: pan-y;
+  }
+
+  .chrome-card {
+    width: min(58vw, 19rem);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .chrome-card[hidden] {
+    display: none;
+  }
+
+  .chromes__hint {
+    color: #dcebd3;
+    font-size: 0.9375rem;
+  }
+
+  .sticker--chrome .sticker__card {
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgb(10 20 15 / 0.3), 0 28px 60px rgb(5 12 8 / 0.5);
+  }
+
+  .sticker--chrome .sticker__name {
+    z-index: 1;
+  }
+
+  .sticker__star {
+    position: absolute;
+    aspect-ratio: 1;
+    background: var(--star, #fff);
+    clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+    z-index: 2;
+  }
+
+  /* El brillo sigue al puntero con --px y --py, de 0 a 100. */
+  .sticker__foil,
+  .sticker__glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .sticker__foil {
+    background: linear-gradient(115deg, transparent 22%, rgb(244 198 214 / 0.62) 38%, rgb(195 238 220 / 0.62) 50%, rgb(242 234 184 / 0.56) 62%, transparent 78%);
+    background-size: 240% 240%;
+    background-position: calc(var(--px, 30) * 1%) calc(var(--py, 30) * 1%);
+    mix-blend-mode: soft-light;
+  }
+
+  .sticker__glare {
+    background: radial-gradient(circle at calc(var(--px, 30) * 1%) calc(var(--py, 30) * 1%), rgb(255 255 255 / 0.55), transparent 48%);
+    mix-blend-mode: overlay;
+  }
+
+  .sticker__badge {
+    position: absolute;
+    left: 77.5%;
+    top: -3%;
+    width: 26.25%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 2px solid var(--badge-edge, #fff);
+    background: var(--badge);
+    box-shadow: 0 2px 6px rgb(20 48 47 / 0.28);
+  }
+
+  .sticker__badge svg {
+    width: 75%;
+    fill: var(--badge-icon);
+  }
+
+  .sticker--chrome[data-finish='holographic'] {
+    --badge: conic-gradient(from 210deg, #f4c6d6, #c5d9f5, #c3eedc, #f2eab8, #dec8f2, #f4c6d6);
+    --badge-icon: #14302f;
+  }
+
+  .sticker--chrome[data-finish='holographic'] .sticker__card {
+    background:
+      conic-gradient(from 200deg at 50% 45%, rgb(244 198 214 / 0.42), rgb(197 217 245 / 0.42), rgb(195 238 220 / 0.42), rgb(242 234 184 / 0.42), rgb(222 200 242 / 0.42), rgb(244 198 214 / 0.42)),
+      linear-gradient(135deg, #f7f9fa, #b7c0c7 18%, #fff 34%, #9aa6ae 52%, #eef1f3 70%, #aab4bb 86%, #f4f6f7);
+  }
+
+  .sticker--chrome[data-finish='silver'] {
+    --badge: linear-gradient(135deg, #fff, #b9c2c9 45%, #eef1f3 62%, #95a1aa);
+    --badge-icon: #2f3b43;
+  }
+
+  .sticker--chrome[data-finish='silver'] .sticker__card {
+    background:
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.12) 0 1px, rgb(30 40 48 / 0.05) 1px 2px),
+      linear-gradient(135deg, #f2f4f6, #a7b1b9 16%, #e9edf0 30%, #7e8b95 48%, #dce1e5 64%, #8f9ba4 82%, #eef1f3);
+  }
+
+  .sticker--chrome[data-finish='silver'] .sticker__name {
+    color: #1e2a31;
+  }
+
+  .sticker--chrome[data-finish='gold'] {
+    --badge: linear-gradient(135deg, #fff3c4, #d9a93e 50%, #f7de8e 70%, #b07f22);
+    --badge-icon: #4a3410;
+    --badge-edge: #fff8e1;
+    --star: #fff6d5;
+  }
+
+  .sticker--chrome[data-finish='gold'] .sticker__card {
+    background:
+      radial-gradient(circle at 28% 18%, rgb(255 255 255 / 0.4), transparent 48%),
+      linear-gradient(135deg, #fff4c9, #e0b348 18%, #fff1bc 34%, #b9872a 52%, #f5d987 70%, #a9781f 86%, #fce7a2);
+  }
+
+  .sticker--chrome[data-finish='gold'] .sticker__name {
+    color: #3b2a0c;
+  }
+
+  .sticker--chrome[data-finish='gold'] .sticker__number {
+    background: #fff8e6;
+    color: #3b2a0c;
+  }
+
+  .sticker--chrome[data-finish='ruby'] {
+    --badge: linear-gradient(135deg, #e8687c, #9c1b31 55%, #6a0f1f);
+    --badge-icon: #fff;
+    --badge-edge: #e9c46a;
+    --star: #ffe7a8;
+  }
+
+  .sticker--chrome[data-finish='ruby'] .sticker__card {
+    background:
+      radial-gradient(circle at 72% 14%, rgb(255 255 255 / 0.3), transparent 45%),
+      linear-gradient(135deg, #e37a8c, #a51e36 20%, #d24a60 36%, #7a1226 54%, #b8334a 72%, #64101f 88%, #c9566a);
+    border: 1.5px solid #e9c46a;
+  }
+
+  .sticker--chrome[data-finish='ruby'] .sticker__name {
+    color: #fff;
+    text-shadow: 0 1px 1px rgb(40 0 10 / 0.45);
+  }
+
+  .sticker--chrome[data-finish='ruby'] .sticker__number {
+    color: #6a0f1f;
+  }
+
+  .sticker--chrome[data-finish='diamond'] {
+    --badge: #16324a;
+    --badge-icon: #9fd3ea;
+  }
+
+  .sticker--chrome[data-finish='diamond'] .sticker__card {
+    background:
+      linear-gradient(115deg, transparent 18%, rgb(244 198 214 / 0.38) 36%, rgb(195 238 220 / 0.38) 50%, rgb(242 234 184 / 0.32) 62%, transparent 82%),
+      conic-gradient(from 22deg at 50% 40%, #f7fcff, #cde5f1, #fff, #b5d2e2, #eef8fd, #c4deec, #fff, #a9c8da, #f2fafe, #c9e2ef, #f7fcff);
+    box-shadow: 0 2px 4px rgb(10 20 15 / 0.3), 0 28px 70px rgb(44 106 134 / 0.55);
+  }
+
+  .sticker--chrome[data-finish='diamond'] .sticker__badge {
+    box-shadow: 0 0 0 2px #bfe3f2, 0 2px 8px rgb(20 48 47 / 0.35);
+  }
+
+  @media (min-width: 60rem) {
+    .chromes {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      align-items: center;
+      gap: 3rem;
+      padding-block: clamp(3rem, 6vw, 5rem);
+    }
+
+    .chromes__copy {
+      display: block;
+    }
+
+    .chromes .lead {
+      margin-top: 1rem;
+    }
+
+    .chromes__options {
+      margin-top: 1.25rem;
+    }
+
+    .chrome-card {
+      width: min(24vw, 21rem);
+    }
+  }
+}

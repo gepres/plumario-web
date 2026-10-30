@@ -1,0 +1,64 @@
+---
+import { THREATENED_BIRDS } from '../data/site';
+
+const promises = [
+  {
+    title: `${THREATENED_BIRDS} aves sin rastro`,
+    body: 'En las especies amenazadas la app nunca guarda la ubicación, ni el lugar que escribas. Tampoco aparece al compartir.',
+  },
+  {
+    title: 'Tus fotos son tuyas',
+    body: 'Al intercambiar solo se ven tu @usuario y los cromos, nunca tus fotos ni dónde las tomaste.',
+  },
+  {
+    title: 'Si un ave está herida',
+    body: 'No la toques ni la alimentes. Avisa a SERFOR o a la autoridad local y, si puedes, quédate cerca sin acercarte.',
+  },
+];
+---
+
+<section class="care" aria-labelledby="care-title">
+  <h2 id="care-title" class="section-title">Ninguna foto vale más que el ave.</h2>
+  <ul class="care__list">
+    {
+      promises.map((promise) => (
+        <li>
+          <h3>{promise.title}</h3>
+          <p>{promise.body}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .care {
+    padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
+  }
+
+  .care__list {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .care__list h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .care__list p {
+    margin-top: 0.5rem;
+    max-width: 30rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 60rem) {
+    .care__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 3rem;
+    }
+  }
+</style>

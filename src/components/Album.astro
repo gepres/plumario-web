@@ -1,0 +1,93 @@
+---
+import { birds, CATEGORIES, HABITATS, HABITAT_ORDER, TOTAL_BIRDS } from '../data/site';
+import Sticker from './Sticker.astro';
+---
+
+<section id="album" class="album" aria-labelledby="album-title" data-album data-total={TOTAL_BIRDS}>
+  <div class="album__head">
+    <h2 id="album-title" class="section-title">Las {TOTAL_BIRDS}, una por una.</h2>
+    <p class="lead">Busca las que ya viste y márcalas. Tu cuenta se guarda en este navegador.</p>
+    <p class="album__count" data-album-count>Llevas 0 de {TOTAL_BIRDS}</p>
+  </div>
+
+  <div class="album__filters">
+    <label class="album__search">
+      <span class="sr-only">Buscar un ave</span>
+      <input type="search" placeholder="Busca por nombre, como colibrí…" autocomplete="off" data-album-search />
+    </label>
+    <label class="album__select">
+      <span class="sr-only">Filtrar por hábitat</span>
+      <select data-album-habitat>
+        <option value="">Todos los hábitats</option>
+        {HABITAT_ORDER.map((key) => <option value={key}>{HABITATS[key].name}</option>)}
+      </select>
+    </label>
+    <label class="album__select">
+      <span class="sr-only">Filtrar por lo que ya viste</span>
+      <select data-album-seen>
+        <option value="">Todas</option>
+        <option value="seen">Ya las vi</option>
+        <option value="missing">Me faltan</option>
+      </select>
+    </label>
+  </div>
+
+  <p class="album__results" role="status" data-album-results></p>
+
+  <ul class="album__grid" data-album-grid data-collapsed>
+    {
+      birds.map((bird) => (
+        <li>
+          <button
+            type="button"
+            class="album__bird"
+            data-bird={bird.id}
+            data-number={bird.number}
+            data-name={bird.name}
+            data-scientific={bird.scientificName}
+            data-family={bird.family}
+            data-habitat={bird.habitat}
+            data-habitat-name={HABITATS[bird.habitat].name}
+            data-category={CATEGORIES[bird.category].name}
+            data-tint={HABITATS[bird.habitat].tint}
+            data-endemic={bird.endemic ? '' : undefined}
+            data-threatened={bird.threatened ? '' : undefined}
+            aria-haspopup="dialog"
+          >
+            <Sticker bird={bird} resolution={160} />
+            <span class="album__mark" aria-hidden="true" />
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="album__more">
+    <button type="button" class="button" data-album-more>Ver las {TOTAL_BIRDS} aves</button>
+  </div>
+
+  <dialog class="bird-dialog" aria-labelledby="bird-dialog-name" data-bird-dialog data-lenis-prevent>
+    <div class="bird-dialog__art" data-dialog-art>
+      <img src="" alt="" width="320" height="320" data-dialog-image />
+    </div>
+    <div class="bird-dialog__body">
+      <h3 id="bird-dialog-name" data-dialog-name></h3>
+      <p class="scientific" translate="no" data-dialog-scientific></p>
+      <dl>
+        <div><dt>N.º en el álbum</dt><dd data-dialog-number></dd></div>
+        <div><dt>Hábitat</dt><dd data-dialog-habitat></dd></div>
+        <div><dt>Cromo</dt><dd data-dialog-category></dd></div>
+        <div><dt>Familia</dt><dd data-dialog-family></dd></div>
+      </dl>
+      <p class="bird-dialog__note" data-dialog-note></p>
+      <div class="bird-dialog__actions">
+        <button type="button" class="button" data-dialog-toggle></button>
+        <button type="button" class="bird-dialog__close" data-dialog-close>Cerrar</button>
+      </div>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  import '../scripts/album';
+</script>

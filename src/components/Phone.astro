@@ -1,0 +1,117 @@
+---
+import { albumNumber, birdById, TOTAL_BIRDS } from '../data/site';
+import Medal from './Medal.astro';
+import Sticker from './Sticker.astro';
+
+// Las pantallas se arman con el diseño de la app (RegistrarCamara, RegistrarIdentificar,
+// RegistrarCompletado, RecompensasPosteres), en la paleta F · Ribera y con las ilustraciones reales.
+const flamingo = birdById('phoenicopterus-chilensis');
+const options = [
+  { bird: flamingo, state: 'sticker vacío', tag: 'Más probable', strong: true, empty: true },
+  { bird: birdById('phoenicoparrus-andinus'), state: 'sticker vacío', tag: 'Posible', strong: false, empty: true },
+  { bird: birdById('phoenicoparrus-jamesi'), state: 'ya está en tu álbum', tag: 'Irá a su galería', strong: false, empty: false },
+];
+const posterBirds = [
+  'pelecanus-thagus',
+  'larosterna-inca',
+  'sula-variegata',
+  'spheniscus-humboldti',
+  'haematopus-palliatus',
+  'phoenicopterus-chilensis',
+  'rynchops-niger',
+  'ardea-alba',
+  'thaumastura-cora',
+  'vultur-gryphus',
+].map(birdById);
+---
+
+<div class="phone" aria-hidden="true">
+  <div class="phone__body">
+    <div class="phone__screen">
+      <div class="screen screen--camera" data-screen="0">
+        <div class="camera-scene">
+          <img src={`/stickers/320/${flamingo.id}.webp`} alt="" width="320" height="320" loading="lazy" />
+        </div>
+        <div class="camera-top" data-in>
+          <strong>Registrar ave</strong>
+          <span>Toma la foto; luego la IA te ayuda a identificarla</span>
+        </div>
+        <div class="camera-frame"><i></i><i></i><i></i><i></i></div>
+        <div class="camera-bottom" data-in>
+          <div class="camera-modes"><b>Foto</b><span>Galería</span><span>Desde el álbum</span></div>
+          <div class="camera-shutter"></div>
+        </div>
+      </div>
+
+      <div class="screen" data-screen="1">
+        <div class="screen__bar" data-in><span class="screen__back"></span><strong>¿Qué ave es?</strong></div>
+        <div class="identify-photo" data-in>
+          <img src={`/stickers/320/${flamingo.id}.webp`} alt="" width="320" height="320" loading="lazy" />
+          <span>Tu foto</span>
+        </div>
+        <div class="identify-head" data-in>
+          <strong>La IA sugiere</strong>
+          <span>Toca el sticker que corresponde a tu foto.</span>
+        </div>
+        <div class="identify-options">
+          {
+            options.map(({ bird, state, tag, strong, empty }, index) => (
+              <div class:list={['identify-option', index === 0 && 'is-picked']} data-in>
+                <div class="identify-option__art">
+                  <Sticker bird={bird} resolution={160} empty={empty} />
+                </div>
+                <div class="identify-option__text">
+                  <strong>{bird.name}</strong>
+                  <span>
+                    N.º {albumNumber(bird.number)}, {state}
+                  </span>
+                  <em class:list={[strong && 'is-strong']}>{tag}</em>
+                </div>
+                <i class="identify-option__dot" />
+              </div>
+            ))
+          }
+        </div>
+        <div class="screen__action" data-in>Colocar en {flamingo.name}</div>
+      </div>
+
+      <div class="screen screen--done" data-screen="2">
+        <span class="done-kicker" data-in>Especie nueva, 13 de {TOTAL_BIRDS}</span>
+        <strong class="done-title" data-in>¡Sticker completado!</strong>
+        <div class="done-sticker" data-in><Sticker bird={flamingo} /></div>
+        <span class="done-name" data-in><b>{flamingo.name}</b><em class="scientific">{flamingo.scientificName}</em></span>
+        <div class="done-progress" data-in>
+          <div><strong>Póster 2</strong><span>13 de 20 especies</span></div>
+          <i><b style="width:65%"></b></i>
+          <span>Te faltan 7 para tu próximo póster y la medalla de 20.</span>
+        </div>
+        <div class="screen__action" data-in>Ver en el álbum</div>
+      </div>
+
+      <div class="screen" data-screen="3">
+        <div class="rewards-head" data-in>
+          <strong>Mis recompensas</strong>
+          <span>13 de {TOTAL_BIRDS} especies, 3 medallas, 2 cromos</span>
+        </div>
+        <div class="rewards-medals" data-in>
+          <Medal kind="firstBird" />
+          <Medal kind="explorer" />
+          <Medal kind="milestone" />
+        </div>
+        <div class="rewards-poster" data-in>
+          <strong>Póster 1</strong>
+          <ul>
+            {
+              posterBirds.map((bird) => (
+                <li>
+                  <img src={`/stickers/160/${bird.id}.webp`} alt="" width="160" height="160" loading="lazy" />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="screen__action screen__action--quiet" data-in>Mezclar y guardar</div>
+      </div>
+    </div>
+  </div>
+</div>

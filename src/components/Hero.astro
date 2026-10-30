@@ -1,0 +1,69 @@
+---
+import { birdById, TOTAL_BIRDS } from '../data/site';
+import Sticker from './Sticker.astro';
+
+// El orden es el del titular: «Me falta el flamenco», luego «el pelícano»…
+const page = [
+  { id: 'phoenicopterus-chilensis', phrase: 'el flamenco.' },
+  { id: 'pelecanus-thagus', phrase: 'el pelícano.' },
+  { id: 'spheniscus-humboldti', phrase: 'el pingüino.' },
+  { id: 'larosterna-inca', phrase: 'el zarcillo.' },
+  { id: 'vultur-gryphus', phrase: 'el cóndor.' },
+  { id: 'polyonymus-caroli', phrase: 'la cometa.' },
+].map((item) => ({ ...item, bird: birdById(item.id) }));
+
+const slots = [...page].sort((a, b) => a.bird.number - b.bird.number);
+// En la bandeja van mezclados, para que haya que buscar la casilla.
+const tray = [page[2], page[0], page[4], page[1], page[5], page[3]];
+const tilts = [-7, 5, -3, 8, -5, 4];
+---
+
+<section class="spread" aria-labelledby="hero-title" data-hero data-total={TOTAL_BIRDS}>
+  <div class="spread__left">
+    <h1 id="hero-title" class="hero-title">
+      <span data-hero-verb>Me falta</span>
+      <span class="hero-title__roll"><span data-hero-missing>{page[0].phrase}</span></span>
+    </h1>
+    <p class="lead">
+      Plumario es el álbum de las {TOTAL_BIRDS} aves de Ica. Ves un ave, le tomas una foto, la IA te ayuda a
+      reconocerla y su sticker queda en tu álbum.
+    </p>
+    <a class="button mt-2" href="#lista">Avísame cuando salga</a>
+  </div>
+
+  <div class="spread__right">
+    <ol class="slots" aria-label="Página del álbum">
+      {
+        slots.map(({ bird }) => (
+          <li class="slot" data-slot={bird.id} data-slot-name={bird.name}>
+            <Sticker bird={bird} empty eager />
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="tray" aria-label="Stickers por pegar">
+      {
+        tray.map(({ bird, phrase }, index) => (
+          <button
+            type="button"
+            class="tray__sticker"
+            style={`--tilt:${tilts[index]}deg`}
+            data-sticker={bird.id}
+            data-phrase={phrase}
+            data-name={bird.name}
+            aria-label={`Pegar ${bird.name} en su casilla`}
+          >
+            <Sticker bird={bird} eager />
+          </button>
+        ))
+      }
+    </div>
+
+    <p class="hero-status" role="status" data-hero-status>Arrastra cada sticker a su casilla, o tócalo.</p>
+  </div>
+</section>
+
+<script>
+  import './../scripts/hero';
+</script>

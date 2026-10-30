@@ -1,0 +1,57 @@
+---
+// La medalla de la app (medal.tsx): cinta, aro de peltre, esmalte del color del logro y su marca.
+type Props = { kind: 'firstBird' | 'explorer' | 'milestone' };
+const { kind } = Astro.props;
+
+const looks = {
+  firstBird: { a: '#A0541F', b: '#E7C9A0', enamel: '#A0541F', mark: '#FBF3E4' },
+  explorer: { a: '#6B5B2A', b: '#E4C766', enamel: '#6B5B2A', mark: '#F3E2A6' },
+  milestone: { a: '#E4C766', b: '#14302F', enamel: '#14302F', mark: '#F3E2A6' },
+};
+const look = looks[kind];
+const id = `rim-${kind}`;
+---
+
+<svg viewBox="0 0 200 240" aria-hidden="true">
+  <defs>
+    <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F2F4F5"></stop>
+      <stop offset="0.3" stop-color="#A9B3B9"></stop>
+      <stop offset="0.52" stop-color="#E7EAEC"></stop>
+      <stop offset="0.78" stop-color="#87929A"></stop>
+      <stop offset="1" stop-color="#D3D8DB"></stop>
+    </linearGradient>
+  </defs>
+  <path d="M62 4h76l-20 96H82z" fill={look.a}></path>
+  <path d="M90 4h20l-4 96h-12z" fill={look.b}></path>
+  <circle cx="100" cy="158" r="74" fill={`url(#${id})`}></circle>
+  <circle cx="100" cy="158" r="60" fill={look.enamel}></circle>
+  {
+    kind === 'firstBird' && (
+      <path
+        transform="translate(64 122)"
+        d="M36 48 L36 12 M36 48 L14 26 M36 48 L58 26 M36 48 L36 62"
+        fill="none"
+        stroke={look.mark}
+        stroke-width="5"
+        stroke-linecap="round"
+      />
+    )
+  }
+  {
+    kind === 'explorer' && (
+      <g transform="translate(64 122)" fill="none" stroke={look.mark} stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="22" cy="46" r="12" />
+        <circle cx="50" cy="46" r="12" />
+        <path d="M12 40 L18 18 H28 L32 36 M60 40 L54 18 H44 L40 36 M32 30 H40" />
+      </g>
+    )
+  }
+  {
+    kind === 'milestone' && (
+      <text x="100" y="178" text-anchor="middle" font-family="var(--font-display)" font-size="56" font-weight="800" fill={look.mark}>
+        10
+      </text>
+    )
+  }
+</svg>

@@ -1,0 +1,41 @@
+---
+import Album from '../components/Album.astro';
+import Care from '../components/Care.astro';
+import Chromes from '../components/Chromes.astro';
+import Footer from '../components/Footer.astro';
+import Habitats from '../components/Habitats.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Waitlist from '../components/Waitlist.astro';
+import { TOTAL_BIRDS } from '../data/site';
+import Base from '../layouts/Base.astro';
+
+const title = `Plumario: el álbum de las ${TOTAL_BIRDS} aves de Ica`;
+const description = `Fotografía las aves de Ica, identifícalas con ayuda de la IA y completa un álbum de ${TOTAL_BIRDS} stickers con cromos, medallas y pósteres. Apúntate a la lista de espera.`;
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'Plumario',
+  description,
+  applicationCategory: 'LifestyleApplication',
+  operatingSystem: 'Android, iOS',
+  inLanguage: 'es',
+  url: Astro.site,
+});
+---
+
+<Base title={title} description={description}>
+  <script slot="head" type="application/ld+json" set:html={structuredData} />
+  <Header />
+  <main id="contenido">
+    <Hero />
+    <HowItWorks />
+    <Chromes />
+    <Habitats />
+    <Album />
+    <Care />
+    <Waitlist />
+  </main>
+  <Footer />
+</Base>

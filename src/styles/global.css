@@ -1,0 +1,173 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque/opsz.css';
+@import '@fontsource-variable/instrument-sans/wght.css';
+@import '@fontsource/instrument-serif/400-italic.css';
+@import 'lenis/dist/lenis.css';
+@import './sticker.css';
+@import './hero.css';
+@import './phone.css';
+@import './chromes.css';
+@import './habitats.css';
+@import './album.css';
+
+/* Paleta F · Ribera (design/palettes/palettes.json de plumario-app), clara y oscura. */
+:root {
+  color-scheme: light dark;
+  --page: light-dark(#ffffff, #101311);
+  --surface: light-dark(#f5f8f0, #191d1a);
+  --surface-2: light-dark(#e7eedc, #242a25);
+  --ink: light-dark(#1e2a1b, #f1f5eb);
+  --ink-2: light-dark(#566249, #aab4a5);
+  --line: light-dark(#e0e7d4, #2d342e);
+  --edge: light-dark(#7d8a6b, #7a8775);
+  --primary: light-dark(#3e6a2b, #a3d27a);
+  --on-primary: light-dark(#ffffff, #11200f);
+  --accent: light-dark(#2e6b5c, #7fc9ba);
+  --sun: light-dark(#e3c45e, #e9cd6f);
+  --error: light-dark(#b03a30, #f4a091);
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+@theme {
+  --font-display: 'Bricolage Grotesque Variable', 'Avenir Next', system-ui, sans-serif;
+  --font-sans: 'Instrument Sans Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-line: var(--line);
+  --color-edge: var(--edge);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-sun: var(--sun);
+}
+
+@layer base {
+  html {
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: clip;
+  }
+
+  a,
+  button,
+  label,
+  input,
+  select {
+    touch-action: manipulation;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: var(--gutter);
+    top: 0.5rem;
+    z-index: 50;
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--primary);
+    color: var(--on-primary);
+    font-weight: 700;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 6.2vw, 5.25rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.022em;
+  }
+
+  .lead {
+    font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+    line-height: 1.45;
+    color: var(--ink-2);
+    max-width: 34rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.25rem;
+    padding: 0 1.5rem;
+    border-radius: 0.875rem;
+    background: var(--primary);
+    color: var(--on-primary);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+
+  .button:hover {
+    background: color-mix(in oklab, var(--primary) 86%, var(--ink));
+  }
+
+  .button:active {
+    transform: scale(0.97);
+  }
+
+  .button--small {
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.9375rem;
+    border-radius: 0.75rem;
+  }
+
+  .scientific {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

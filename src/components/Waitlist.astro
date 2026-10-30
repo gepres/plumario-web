@@ -1,0 +1,157 @@
+---
+import { birdById, CATEGORIES } from '../data/site';
+import Sticker from './Sticker.astro';
+
+const closing = [
+  { bird: birdById('sula-variegata'), tilt: -8 },
+  { bird: birdById(CATEGORIES.silver.birdId), tilt: 5 },
+  { bird: birdById('rynchops-niger'), tilt: -3 },
+];
+---
+
+<section id="lista" class="waitlist" aria-labelledby="waitlist-title">
+  <div class="waitlist__copy">
+    <h2 id="waitlist-title" class="section-title">Ica es la primera edición.</h2>
+    <p>Déjanos tu correo y te avisamos cuando Plumario esté listo para descargar.</p>
+
+    <form name="lista-de-espera" method="POST" action="/gracias/" data-netlify="true" netlify-honeypot="bot-field" data-waitlist novalidate>
+      <input type="hidden" name="form-name" value="lista-de-espera" />
+      <p class="sr-only" aria-hidden="true">
+        <label>No llenes este campo <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
+      <label for="waitlist-email">Tu correo</label>
+      <div class="waitlist__row">
+        <input id="waitlist-email" name="email" type="email" required autocomplete="email" inputmode="email" spellcheck="false" placeholder="nombre@correo.com" aria-describedby="waitlist-message" />
+        <button type="submit" class="waitlist__submit">Avísame cuando salga</button>
+      </div>
+      <p id="waitlist-message" class="waitlist__message" role="status" data-waitlist-message>Solo lo usaremos para avisarte del lanzamiento.</p>
+    </form>
+  </div>
+
+  <div class="waitlist__stickers" aria-hidden="true">
+    {
+      closing.map(({ bird, tilt }) => (
+        <div style={`transform:rotate(${tilt}deg)`}>
+          <Sticker bird={bird} />
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import '../scripts/waitlist';
+</script>
+
+<style>
+  .waitlist {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    padding: clamp(4rem, 9vw, 7.5rem) var(--gutter);
+    background: linear-gradient(135deg, #44682e 0%, #2b5a4b 100%);
+    color: #fff;
+    overflow: clip;
+  }
+
+  .waitlist__copy > p {
+    margin-top: 1rem;
+    max-width: 30rem;
+    font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+    line-height: 1.45;
+    color: #e0eed0;
+  }
+
+  form {
+    margin-top: 1.75rem;
+    max-width: 34rem;
+  }
+
+  form label {
+    display: block;
+    font-weight: 700;
+  }
+
+  .waitlist__row {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  input[type='email'] {
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0 1rem;
+    border-radius: 0.875rem;
+    background: #fff;
+    color: #1e2a1b;
+    font-size: 1.0625rem;
+  }
+
+  input[type='email']::placeholder {
+    color: #566249;
+  }
+
+  input[type='email'][aria-invalid='true'] {
+    box-shadow: 0 0 0 3px #f4a091;
+  }
+
+  .waitlist__submit {
+    min-height: 3.25rem;
+    padding: 0 1.25rem;
+    border-radius: 0.875rem;
+    background: #e3c45e;
+    color: #2d2e16;
+    font-weight: 700;
+    font-size: 1.0625rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+
+  .waitlist__submit:hover {
+    background: #edd57f;
+  }
+
+  .waitlist__submit:active {
+    transform: scale(0.97);
+  }
+
+  .waitlist__submit:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
+  .waitlist__message {
+    min-height: 1.5em;
+    margin-top: 0.625rem;
+    color: #e0eed0;
+  }
+
+  .waitlist__stickers {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .waitlist__stickers > div {
+    width: min(28vw, 13rem);
+    flex: none;
+  }
+
+  @media (min-width: 40rem) {
+    .waitlist__row {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+
+  @media (min-width: 60rem) {
+    .waitlist {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    }
+
+    .waitlist__stickers > div {
+      width: min(13vw, 13rem);
+    }
+  }
+</style>

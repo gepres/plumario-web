@@ -1,0 +1,79 @@
+---
+import { albumNumber, HABITATS, type Bird, type Category } from '../data/site';
+
+type Props = {
+  bird: Bird;
+  /** Resolución de la ilustración: 160 en retículas densas, 320 en lo demás. */
+  resolution?: 160 | 320;
+  /** En sombra: la especie todavía no está en el álbum. */
+  empty?: boolean;
+  /** Cromado con el acabado de su categoría. */
+  finish?: Category;
+  eager?: boolean;
+};
+
+const { bird, resolution = 320, empty = false, finish, eager = false } = Astro.props;
+
+// Los sellos y las estrellas de sticker-finishes.ts de la app, en unidades de la tarjeta de 160 × 205.
+const BADGES: Record<Category, string[]> = {
+  holographic: ['M12 2.5l2.7 6.1 6.6.6-5 4.4 1.5 6.5L12 16.8 6.2 20.1l1.5-6.5-5-4.4 6.6-.6z'],
+  silver: ['M12 2.5l7.5 3v6c0 4.6-3.2 8.4-7.5 10-4.3-1.6-7.5-5.4-7.5-10v-6z'],
+  gold: ['M12 2.2a7 7 0 0 0-7 7c0 5.2 7 12.6 7 12.6s7-7.4 7-12.6a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z'],
+  ruby: ['M5 2.5h2.2v19H5z M8.2 3.5H19l-3.2 4.6L19 12.7H8.2z'],
+  diamond: ['M7 3.5h10l4.5 5.5L12 21 2.5 9z', 'M7 3.5h10l4.5 5.5h-19z'],
+};
+
+const STARS: Record<Category, [number, number, number][]> = {
+  holographic: [[110, 40, 18], [27, 122, 14], [139, 104, 10]],
+  silver: [[110, 40, 14], [27, 122, 10]],
+  gold: [[110, 40, 18], [27, 122, 14], [139, 104, 10]],
+  ruby: [[110, 40, 18], [27, 122, 14], [139, 104, 10]],
+  diamond: [[110, 40, 20], [27, 122, 16], [139, 104, 12], [34, 30, 10], [112, 140, 9]],
+};
+
+const unit = (value: number) => `${(value * 0.625).toFixed(3)}cqw`;
+---
+
+<span
+  class:list={['sticker', empty && 'sticker--empty', finish && 'sticker--chrome']}
+  style={`--tint:${HABITATS[bird.habitat].tint}`}
+  data-finish={finish}
+>
+  <span class="sticker__card">
+    <span class="sticker__plate">
+      <img
+        src={`/stickers/${resolution}/${bird.id}.webp`}
+        alt=""
+        width={resolution}
+        height={resolution}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        draggable="false"
+      />
+      <span class="sticker__number">{albumNumber(bird.number)}</span>
+    </span>
+    <span class="sticker__name">{bird.name}</span>
+    {
+      finish && (
+        <>
+          {STARS[finish].map(([x, y, size]) => (
+            <i class="sticker__star" style={`left:${unit(x - size / 2)};top:${unit(y - size / 2)};width:${unit(size)}`} />
+          ))}
+          <span class="sticker__foil" />
+          <span class="sticker__glare" />
+        </>
+      )
+    }
+  </span>
+  {
+    finish && (
+      <span class="sticker__badge">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          {BADGES[finish].map((path) => (
+            <path d={path} fill-rule="evenodd" />
+          ))}
+        </svg>
+      </span>
+    )
+  }
+</span>

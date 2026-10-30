@@ -1,0 +1,570 @@
+/* Las pantallas miden 390 × 844 como en el diseño: --u es 1 px del diseño a la escala del teléfono. */
+@layer components {
+  .how__stage {
+    display: grid;
+    gap: 2.5rem;
+    padding: 3rem var(--gutter);
+  }
+
+  .how__steps {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .how__step {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .how__step h3 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .how__step p {
+    margin-top: 0.375rem;
+    color: var(--ink-2);
+    line-height: 1.45;
+    max-width: 30rem;
+  }
+
+  .how__number {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1.5px dashed var(--edge);
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--ink-2);
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .how__step[data-active] .how__number {
+    background: var(--sun);
+    border-color: var(--sun);
+    color: #2d2e16;
+  }
+
+  /* Sin JavaScript queda la lista de pasos; el teléfono necesita el scroll para tener sentido. */
+  .phone {
+    display: none;
+  }
+
+  .js .how {
+    height: 400svh;
+  }
+
+  .js .how__stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 1.5rem;
+  }
+
+  .js .how .section-title {
+    font-size: clamp(1.875rem, 8vw, 2.5rem);
+  }
+
+  .js .how__steps {
+    position: relative;
+    margin-top: 0.75rem;
+    min-height: 7.25rem;
+  }
+
+  /* En móvil se ve un paso a la vez bajo el título; los demás siguen disponibles para lectores. */
+  .js .how__step {
+    position: absolute;
+    inset: 0 0 auto;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .js .how__step[data-active] {
+    opacity: 1;
+  }
+
+  .js .phone {
+    --phone-w: min(62vw, 42svh);
+    --u: calc(var(--phone-w) / 390);
+    display: block;
+    width: var(--phone-w);
+    justify-self: center;
+    align-self: end;
+  }
+
+  .phone__body {
+    padding: calc(10 * var(--u));
+    border-radius: calc(58 * var(--u));
+    background: #1e2a1b;
+    box-shadow: 0 calc(24 * var(--u)) calc(60 * var(--u)) rgb(20 48 47 / 0.25);
+  }
+
+  .phone__screen {
+    position: relative;
+    height: calc(844 * var(--u));
+    overflow: hidden;
+    border-radius: calc(48 * var(--u));
+    background: #fff;
+    color: #1e2a1b;
+    font-family: var(--font-sans);
+    font-size: calc(14 * var(--u));
+    line-height: 1.3;
+  }
+
+  .screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding-top: calc(44 * var(--u));
+    background: #fff;
+    visibility: hidden;
+  }
+
+  .screen strong {
+    font-weight: 700;
+  }
+
+  .screen__bar {
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--u));
+    height: calc(56 * var(--u));
+    padding: 0 calc(20 * var(--u));
+    font-family: var(--font-display);
+    font-size: calc(20 * var(--u));
+  }
+
+  .screen__back {
+    width: calc(11 * var(--u));
+    height: calc(11 * var(--u));
+    border-left: calc(2 * var(--u)) solid currentColor;
+    border-bottom: calc(2 * var(--u)) solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .screen__action {
+    margin: auto calc(16 * var(--u)) calc(28 * var(--u));
+    min-height: calc(52 * var(--u));
+    display: grid;
+    place-items: center;
+    border-radius: calc(14 * var(--u));
+    background: #3e6a2b;
+    color: #fff;
+    font-weight: 700;
+    font-size: calc(15.5 * var(--u));
+  }
+
+  .screen__action--quiet {
+    background: #e7eedc;
+    color: #1e2a1b;
+  }
+
+  .screen--camera {
+    padding: 0;
+    color: #fff;
+    background: #13271d;
+  }
+
+  .camera-scene {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #cfe2e6 0%, #a9cbd2 44%, #7fa89f 45%, #6d9a8f 66%, #b9a57f 67%, #a8946e 100%);
+  }
+
+  .camera-scene img {
+    position: absolute;
+    left: 50%;
+    top: 26%;
+    width: 86%;
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .camera-top {
+    position: relative;
+    display: grid;
+    gap: calc(2 * var(--u));
+    padding: calc(52 * var(--u)) calc(20 * var(--u)) calc(16 * var(--u));
+    background: linear-gradient(180deg, rgb(11 20 20 / 0.62), transparent);
+  }
+
+  .camera-top strong {
+    font-family: var(--font-display);
+    font-size: calc(22 * var(--u));
+  }
+
+  .camera-frame {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 24%;
+    bottom: 22%;
+  }
+
+  .camera-frame i {
+    position: absolute;
+    width: calc(34 * var(--u));
+    height: calc(34 * var(--u));
+    border: calc(3 * var(--u)) solid #fff;
+    border-radius: calc(4 * var(--u));
+  }
+
+  .camera-frame i:nth-child(1) {
+    left: 0;
+    top: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .camera-frame i:nth-child(2) {
+    right: 0;
+    top: 0;
+    border-left: 0;
+    border-bottom: 0;
+  }
+
+  .camera-frame i:nth-child(3) {
+    left: 0;
+    bottom: 0;
+    border-right: 0;
+    border-top: 0;
+  }
+
+  .camera-frame i:nth-child(4) {
+    right: 0;
+    bottom: 0;
+    border-left: 0;
+    border-top: 0;
+  }
+
+  .camera-bottom {
+    position: relative;
+    margin-top: auto;
+    display: grid;
+    justify-items: center;
+    gap: calc(16 * var(--u));
+    padding: calc(16 * var(--u)) 0 calc(34 * var(--u));
+    background: rgb(11 20 20 / 0.72);
+  }
+
+  .camera-modes {
+    display: flex;
+    gap: calc(18 * var(--u));
+    color: rgb(255 255 255 / 0.75);
+  }
+
+  .camera-modes b {
+    color: #e3c45e;
+  }
+
+  .camera-shutter {
+    width: calc(70 * var(--u));
+    height: calc(70 * var(--u));
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 calc(4 * var(--u)) #13271d, 0 0 0 calc(7 * var(--u)) #fff;
+  }
+
+  .identify-photo {
+    position: relative;
+    flex: none;
+    height: calc(238 * var(--u));
+    margin: 0 calc(16 * var(--u));
+    overflow: hidden;
+    border-radius: calc(18 * var(--u));
+    background: linear-gradient(180deg, #cfe2e6 0%, #a9cbd2 44%, #7fa89f 45%, #6d9a8f 100%);
+  }
+
+  .identify-photo img {
+    position: absolute;
+    left: 50%;
+    top: calc(8 * var(--u));
+    width: calc(224 * var(--u));
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .identify-photo span {
+    position: absolute;
+    left: calc(10 * var(--u));
+    bottom: calc(10 * var(--u));
+    padding: calc(4 * var(--u)) calc(10 * var(--u));
+    border-radius: 999px;
+    background: rgb(11 20 20 / 0.6);
+    color: #fff;
+    font-size: calc(12 * var(--u));
+    font-weight: 700;
+  }
+
+  .identify-head {
+    display: grid;
+    gap: calc(2 * var(--u));
+    margin: calc(14 * var(--u)) calc(20 * var(--u)) 0;
+    color: #566249;
+    font-size: calc(13 * var(--u));
+  }
+
+  .identify-head strong {
+    font-family: var(--font-display);
+    font-size: calc(18 * var(--u));
+    color: #1e2a1b;
+  }
+
+  .identify-options {
+    display: grid;
+    gap: calc(8 * var(--u));
+    margin: calc(10 * var(--u)) calc(16 * var(--u)) 0;
+  }
+
+  .identify-option {
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--u));
+    padding: calc(7 * var(--u)) calc(14 * var(--u)) calc(7 * var(--u)) calc(10 * var(--u));
+    border: 1px solid #e0e7d4;
+    border-radius: calc(16 * var(--u));
+  }
+
+  .identify-option.is-picked {
+    border: calc(2 * var(--u)) solid #3e6a2b;
+    background: #f5f8f0;
+  }
+
+  .identify-option__art {
+    flex: none;
+    width: calc(56 * var(--u));
+  }
+
+  .identify-option__art .sticker {
+    aspect-ratio: 1;
+  }
+
+  .identify-option__art .sticker__name,
+  .identify-option__art .sticker__number {
+    display: none;
+  }
+
+  .identify-option__text {
+    flex: 1;
+    display: grid;
+    gap: calc(2 * var(--u));
+    min-width: 0;
+    font-size: calc(12.5 * var(--u));
+    color: #566249;
+  }
+
+  .identify-option__text strong {
+    font-size: calc(15.5 * var(--u));
+    color: #1e2a1b;
+  }
+
+  .identify-option__text em {
+    justify-self: start;
+    padding: calc(2 * var(--u)) calc(8 * var(--u));
+    border-radius: 999px;
+    background: #e7eedc;
+    color: #1e2a1b;
+    font-size: calc(11.5 * var(--u));
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .identify-option__text em.is-strong {
+    background: #3e6a2b;
+    color: #fff;
+  }
+
+  .identify-option__dot {
+    flex: none;
+    width: calc(22 * var(--u));
+    height: calc(22 * var(--u));
+    border-radius: 50%;
+    border: calc(2 * var(--u)) solid #7d8a6b;
+  }
+
+  .is-picked .identify-option__dot {
+    border: calc(7 * var(--u)) solid #3e6a2b;
+  }
+
+  .screen--done {
+    align-items: center;
+    padding-top: calc(70 * var(--u));
+    color: #fff;
+    background: radial-gradient(circle at 50% 34%, #375a3b 0%, #13271d 64%);
+    text-align: center;
+  }
+
+  .done-kicker {
+    color: #dcebd3;
+    font-weight: 700;
+    font-size: calc(13 * var(--u));
+  }
+
+  .done-title {
+    margin-top: calc(4 * var(--u));
+    font-family: var(--font-display);
+    font-size: calc(30 * var(--u));
+    font-weight: 800;
+  }
+
+  .done-sticker {
+    width: calc(188 * var(--u));
+    margin-top: calc(22 * var(--u));
+  }
+
+  .done-name {
+    display: grid;
+    margin-top: calc(14 * var(--u));
+    font-size: calc(19 * var(--u));
+  }
+
+  .done-name em {
+    color: #dcebd3;
+    font-size: calc(17 * var(--u));
+  }
+
+  .done-progress {
+    align-self: stretch;
+    display: grid;
+    gap: calc(8 * var(--u));
+    margin: calc(20 * var(--u)) calc(16 * var(--u)) 0;
+    padding: calc(14 * var(--u));
+    border-radius: calc(16 * var(--u));
+    background: rgb(255 255 255 / 0.1);
+    font-size: calc(12.5 * var(--u));
+    text-align: left;
+    color: #dcebd3;
+  }
+
+  .done-progress > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .done-progress strong {
+    color: #fff;
+  }
+
+  .done-progress i {
+    display: block;
+    height: calc(8 * var(--u));
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.24);
+  }
+
+  .done-progress b {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: #e3c45e;
+  }
+
+  .screen--done .screen__action {
+    align-self: stretch;
+    background: #fff;
+    color: #1e2a1b;
+  }
+
+  .rewards-head {
+    display: grid;
+    gap: calc(2 * var(--u));
+    padding: calc(14 * var(--u)) calc(20 * var(--u)) 0;
+    color: #566249;
+    font-size: calc(13 * var(--u));
+  }
+
+  .rewards-head strong {
+    font-family: var(--font-display);
+    font-size: calc(27 * var(--u));
+    font-weight: 800;
+    color: #1e2a1b;
+  }
+
+  .rewards-medals {
+    display: flex;
+    justify-content: center;
+    gap: calc(16 * var(--u));
+    margin: calc(14 * var(--u)) 0;
+  }
+
+  .rewards-medals svg {
+    width: calc(82 * var(--u));
+    height: auto;
+  }
+
+  .rewards-poster {
+    margin: 0 calc(16 * var(--u));
+    padding: calc(14 * var(--u));
+    border-radius: calc(10 * var(--u));
+    background: #e7eedc;
+    font-family: var(--font-display);
+    font-size: calc(18 * var(--u));
+  }
+
+  .rewards-poster ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(4 * var(--u));
+    margin-top: calc(8 * var(--u));
+  }
+
+  .rewards-poster li:last-child {
+    grid-column: 2;
+  }
+
+  @media (min-width: 60rem) {
+    .how__stage,
+    .js .how__stage {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      grid-template-rows: none;
+      align-items: center;
+      gap: 3rem;
+      padding-block: 1.5rem;
+    }
+
+    .js .how .section-title {
+      font-size: clamp(2.5rem, 4.8vw, 4.5rem);
+    }
+
+    .js .how__steps {
+      min-height: 0;
+      margin-top: 2rem;
+      gap: 1.25rem;
+    }
+
+    .js .how__step {
+      position: static;
+      opacity: 1;
+    }
+
+    /* El paso activo se distingue por color, sin bajar el contraste de los demás. */
+    .js .how__step h3 {
+      color: var(--ink-2);
+      transition: color 0.25s ease;
+    }
+
+    .js .how__step[data-active] h3 {
+      color: var(--ink);
+    }
+
+    .js .how__step[data-active] p {
+      color: var(--ink);
+    }
+
+    .js .phone {
+      --phone-w: min(25vw, 41svh);
+      align-self: center;
+    }
+  }
+}

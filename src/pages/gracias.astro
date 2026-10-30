@@ -1,0 +1,15 @@
+---
+import Logo from '../components/Logo.astro';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Ya estás en la lista de Plumario" description="Te avisaremos cuando Plumario esté listo para descargar." noindex>
+  <main class="grid min-h-svh place-items-center px-6 text-center">
+    <div class="grid justify-items-center gap-4">
+      <Logo class="h-20 w-auto" />
+      <h1 class="section-title">Ya estás en la lista.</h1>
+      <p class="lead">Te avisaremos cuando Plumario esté listo para descargar.</p>
+      <a class="button" href="/">Volver al álbum</a>
+    </div>
+  </main>
+</Base>

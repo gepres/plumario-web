@@ -1,0 +1,50 @@
+---
+import Phone from './Phone.astro';
+
+const steps = [
+  {
+    title: 'Fotografía el ave',
+    body: 'Toma la foto o elige una de tu galería. Si no hay señal, queda guardada en el teléfono y se sube sola al volver la conexión.',
+  },
+  {
+    title: 'La IA sugiere la especie',
+    body: 'Te muestra las aves más probables y tú eliges. Si no es ninguna, la buscas en el álbum.',
+  },
+  {
+    title: 'Completa el sticker',
+    body: 'El sticker del ave queda en su casilla. Tu foto se guarda en la galería de la especie.',
+  },
+  {
+    title: 'Gana medallas y pósteres',
+    body: 'Cada 10 especies recibes una medalla y un póster A3 con 10 de tus stickers, que puedes mezclar y guardar.',
+  },
+];
+---
+
+<section id="como-funciona" class="how" aria-labelledby="how-title" data-how>
+  <div class="how__stage">
+    <div class="how__copy">
+      <h2 id="how-title" class="section-title">Este álbum se llena saliendo a mirar.</h2>
+      <ol class="how__steps">
+        {
+          steps.map((step, index) => (
+            <li class="how__step" data-step={index}>
+              <span class="how__number" aria-hidden="true">
+                {index + 1}
+              </span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <Phone />
+  </div>
+</section>
+
+<script>
+  import '../scripts/how-it-works';
+</script>

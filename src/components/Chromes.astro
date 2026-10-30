@@ -1,0 +1,48 @@
+---
+import { birdById, CATEGORIES, CATEGORY_ORDER, categoryCount } from '../data/site';
+import Sticker from './Sticker.astro';
+
+const categories = CATEGORY_ORDER.map((key) => ({ key, ...CATEGORIES[key], count: categoryCount(key), bird: birdById(CATEGORIES[key].birdId) }));
+---
+
+<section id="cromos" class="chromes" aria-labelledby="chromes-title" data-chromes>
+  <div class="chromes__copy">
+    <h2 id="chromes-title" class="section-title">Las aves más amenazadas tienen el cromo de diamante.</h2>
+    <p class="lead">
+      Cada especie tiene una categoría fija según su estado de conservación, si es endémica o si es emblemática. Al
+      completar un sticker sale cromo 1 de cada 8 veces. También lo consigues con 5 fotos validadas o en un intercambio.
+    </p>
+
+    <fieldset class="chromes__options">
+      <legend class="sr-only">Categoría de cromo</legend>
+      {
+        categories.map((category, index) => (
+          <label class="chrome-option">
+            <input type="radio" name="chrome-category" value={category.key} checked={index === 0} />
+            <span class="chrome-option__swatch" data-swatch={category.key} />
+            <span class="chrome-option__text">
+              <strong>{category.name}</strong>
+              <span>{category.rule}</span>
+            </span>
+            <span class="chrome-option__count">{category.count}</span>
+          </label>
+        ))
+      }
+    </fieldset>
+  </div>
+
+  <div class="chromes__stage" data-chrome-stage>
+    {
+      categories.map((category, index) => (
+        <div class="chrome-card" data-chrome={category.key} hidden={index > 0}>
+          <Sticker bird={category.bird} finish={category.key} />
+        </div>
+      ))
+    }
+    <p class="chromes__hint">Mueve el cromo con el puntero o el dedo.</p>
+  </div>
+</section>
+
+<script>
+  import '../scripts/chromes';
+</script>

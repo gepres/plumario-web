@@ -1,0 +1,57 @@
+---
+import { birds, HABITATS, HABITAT_ORDER } from '../data/site';
+
+const habitats = HABITAT_ORDER.map((key) => ({ key, ...HABITATS[key], count: birds.filter((bird) => bird.habitat === key).length }));
+const first = habitats[0];
+---
+
+<section id="habitats" class="habitats" aria-labelledby="habitats-title" data-habitats>
+  <div class="habitats__copy">
+    <h2 id="habitats-title" class="section-title">Completa un hábitat y su póster es tuyo.</h2>
+    <p class="lead">
+      El póster de cada hábitat está siempre a la vista, con las aves que faltan en sombra. Cuando registras todas sus
+      especies, lo descargas en A3.
+    </p>
+
+    <fieldset class="habitats__options">
+      <legend class="sr-only">Hábitat</legend>
+      {
+        habitats.map((habitat, index) => (
+          <label class="habitat-option" style={`--habitat:${habitat.color}`}>
+            <input
+              type="radio"
+              name="habitat"
+              value={habitat.key}
+              checked={index === 0}
+              data-name={habitat.name}
+              data-place={habitat.place}
+              data-tint={habitat.tint}
+              data-color={habitat.color}
+            />
+            <span>{habitat.name}</span>
+            <b>{habitat.count}</b>
+          </label>
+        ))
+      }
+    </fieldset>
+
+    <div class="habitats__range">
+      <label for="habitat-progress">Muévelo para llenar el póster</label>
+      <input id="habitat-progress" type="range" min="0" max={first.count} value="12" step="1" data-habitat-range />
+      <output for="habitat-progress" data-habitat-output>12 de {first.count} especies</output>
+    </div>
+  </div>
+
+  <figure class="poster" style={`--tint:${first.tint};--habitat:${first.color}`} data-poster>
+    <figcaption class="poster__head">
+      <strong data-poster-name>{first.name}</strong>
+      <span data-poster-place>{first.place}</span>
+    </figcaption>
+    <ul class="poster__grid" data-poster-grid aria-hidden="true"></ul>
+    <p class="poster__foot" data-poster-status>Plumario, edición Ica</p>
+  </figure>
+</section>
+
+<script>
+  import '../scripts/habitats';
+</script>

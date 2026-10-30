@@ -1,0 +1,105 @@
+---
+import Logo from './Logo.astro';
+
+const links = [
+  { href: '#como-funciona', label: 'Cómo funciona' },
+  { href: '#cromos', label: 'Cromos' },
+  { href: '#habitats', label: 'Hábitats' },
+  { href: '#album', label: 'Las aves' },
+];
+---
+
+<header class="site-header">
+  <a href="/" class="site-header__brand">
+    <Logo class="h-9 w-auto" />
+    <span translate="no">Plumario</span>
+  </a>
+  <nav aria-label="Secciones" class="site-header__nav">
+    {links.map((link) => <a href={link.href}>{link.label}</a>)}
+  </nav>
+  <div class="site-header__actions">
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar entre tema claro y oscuro">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.5"></circle>
+        <path d="M12 3.5v17" ></path>
+        <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"></path>
+      </svg>
+    </button>
+    <a class="button button--small" href="#lista">Avísame</a>
+  </div>
+</header>
+
+<style is:global>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem var(--gutter);
+    position: relative;
+    z-index: 20;
+  }
+
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
+  }
+
+  .site-header__nav {
+    display: none;
+    gap: 1.75rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+
+  .site-header__nav a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    color: var(--ink);
+    background: var(--surface);
+  }
+
+  @media (min-width: 60rem) {
+    .site-header__nav {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    const next = dark ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('plumario-theme', next);
+    } catch {}
+  });
+</script>
