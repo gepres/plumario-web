@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://plumario.netlify.app/sitemap-index.xml
+Sitemap: https://plumario.trek-peru.com/sitemap-index.xml

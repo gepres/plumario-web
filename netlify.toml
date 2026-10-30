@@ -14,3 +14,10 @@
   for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# La dirección de Netlify lleva al dominio propio: así no quedan dos copias de la web.
+[[redirects]]
+  from = "https://plumario.netlify.app/*"
+  to = "https://plumario.trek-peru.com/:splat"
+  status = 301
+  force = true
