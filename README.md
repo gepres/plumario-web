@@ -19,6 +19,9 @@ pnpm content:sync   # trae catálogo e ilustraciones desde ../plumario-app
 
 - **Aves, números y cromos:** `src/data/birds.json` y `public/stickers/` se generan con
   `pnpm content:sync`. No se editan a mano. Si cambia el catálogo de la app, se vuelve a correr.
+- **Muestra:** solo las aves de `src/data/sample.json` se publican en color; de las demás se publica
+  una silueta negra. El álbum completo se desbloquea en la app, así que ninguna otra ilustración
+  debe llegar a `public/`.
 - **Regla de categorías de cromo:** copia de `categoryOf` en `packages/core/src/domain/card.ts` de
   la app. Si allá cambia, hay que cambiarla en `scripts/sync-content.mjs`.
 - **Colores:** paleta F · Ribera de la app, en `src/styles/global.css`.
@@ -31,6 +34,7 @@ pnpm content:sync   # trae catálogo e ilustraciones desde ../plumario-app
 ## Reglas
 
 - La web solo promete lo que la app hace; las cifras salen del catálogo.
+- La web es una muestra: lo que invita a descargar la app no se regala aquí.
 - Lo impreso va plano y sin sombra. Solo los stickers tienen sombra.
 - Código en inglés; comentarios y textos en español.
 - Toda interacción tiene alternativa por teclado y respeta `prefers-reduced-motion`.

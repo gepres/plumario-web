@@ -1,8 +1,19 @@
 ---
-import { birds, HABITATS, HABITAT_ORDER } from '../data/site';
+import { birds, HABITATS, HABITAT_ORDER, SAMPLE_BIRDS } from '../data/site';
 
 const habitats = HABITAT_ORDER.map((key) => ({ key, ...HABITATS[key], count: birds.filter((bird) => bird.habitat === key).length }));
 const first = habitats[0];
+
+// Cada póster son siluetas numeradas; solo las aves de la muestra pueden pasar a color.
+const posters = Object.fromEntries(
+  HABITAT_ORDER.map((key) => [
+    key,
+    {
+      numbers: birds.filter((bird) => bird.habitat === key).map((bird) => bird.number),
+      sample: Object.fromEntries(SAMPLE_BIRDS.filter((bird) => bird.habitat === key).map((bird) => [bird.number, bird.id])),
+    },
+  ]),
+);
 ---
 
 <section id="habitats" class="habitats" aria-labelledby="habitats-title" data-habitats>
@@ -36,9 +47,9 @@ const first = habitats[0];
     </fieldset>
 
     <div class="habitats__range">
-      <label for="habitat-progress">Muévelo para llenar el póster</label>
-      <input id="habitat-progress" type="range" min="0" max={first.count} value="12" step="1" data-habitat-range />
-      <output for="habitat-progress" data-habitat-output>12 de {first.count} especies</output>
+      <label for="habitat-progress">Muévelo para ver una muestra del póster</label>
+      <input id="habitat-progress" type="range" min="0" max="5" value="2" step="1" data-habitat-range />
+      <output for="habitat-progress" data-habitat-output>2 de {first.count} especies</output>
     </div>
   </div>
 
@@ -50,6 +61,8 @@ const first = habitats[0];
     <ul class="poster__grid" data-poster-grid aria-hidden="true"></ul>
     <p class="poster__foot" data-poster-status>Plumario, edición Ica</p>
   </figure>
+
+  <script type="application/json" data-posters set:html={JSON.stringify(posters)} />
 </section>
 
 <script>

@@ -1,4 +1,5 @@
 import birdsJson from './birds.json';
+import sampleIds from './sample.json';
 
 export type Habitat = 'coast' | 'wetlands' | 'desert' | 'highlands' | 'openSea';
 export type Category = 'holographic' | 'silver' | 'gold' | 'ruby' | 'diamond';
@@ -18,6 +19,11 @@ export type Bird = {
 export const birds = birdsJson as Bird[];
 export const TOTAL_BIRDS = birds.length;
 export const THREATENED_BIRDS = birds.filter((bird) => bird.threatened).length;
+
+// Solo estas aves se publican en color: las demás se desbloquean en la app con una foto.
+const sample = new Set<string>(sampleIds);
+export const SAMPLE_BIRDS = birds.filter((bird) => sample.has(bird.id));
+export const LOCKED_BIRDS = birds.filter((bird) => !sample.has(bird.id));
 
 // Las tintas son las de stickerTints en @plumario/tokens; el color, el de la paleta F · Ribera.
 export const HABITATS: Record<Habitat, { name: string; place: string; tint: string; color: string }> = {

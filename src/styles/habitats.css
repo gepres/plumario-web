@@ -125,12 +125,12 @@
   .poster__grid img {
     width: 100%;
     height: 100%;
-    filter: brightness(0) opacity(0.14);
-    transition: filter 0.25s ease;
+    opacity: 0.14;
+    transition: opacity 0.25s ease;
   }
 
   .poster__grid li[data-filled] img {
-    filter: none;
+    opacity: 1;
   }
 
   .poster__foot {

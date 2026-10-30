@@ -1,5 +1,7 @@
 import { gsap } from './motion';
 
+type Poster = { numbers: number[]; sample: Record<string, string> };
+
 const root = document.querySelector<HTMLElement>('[data-habitats]');
 
 if (root) {
@@ -11,49 +13,62 @@ if (root) {
   const range = root.querySelector<HTMLInputElement>('[data-habitat-range]')!;
   const output = root.querySelector<HTMLOutputElement>('[data-habitat-output]')!;
   const inputs = [...root.querySelectorAll<HTMLInputElement>('input[name="habitat"]')];
+  const posters = JSON.parse(root.querySelector('[data-posters]')!.textContent!) as Record<string, Poster>;
 
-  // Las aves salen del álbum, que ya las trae en el HTML: así no se repiten los datos.
-  const album = [...document.querySelectorAll<HTMLElement>('[data-bird]')];
-  let fillOrder: HTMLElement[] = [];
+  let total = 0;
+  let fillable: HTMLImageElement[] = [];
 
   function paintProgress() {
     const value = Number(range.value);
-    const total = Number(range.max);
-    fillOrder.forEach((item, index) => item.toggleAttribute('data-filled', index < value));
+    fillable.forEach((image, index) => {
+      const filled = index < value;
+      image.src = filled ? image.dataset.art! : image.dataset.shadow!;
+      image.parentElement!.toggleAttribute('data-filled', filled);
+    });
     output.value = `${value} de ${total} especies`;
     range.setAttribute('aria-valuetext', output.value);
-    status.textContent = value === total ? 'Póster completo: listo para descargar en A3.' : 'Plumario, edición Ica';
+    status.textContent =
+      value === fillable.length ? `Hasta aquí la muestra. Las otras ${total - value} se desbloquean en la app.` : 'Plumario, edición Ica';
   }
 
   function showHabitat(input: HTMLInputElement) {
-    const species = album.filter((bird) => bird.dataset.habitat === input.value);
+    const { numbers, sample } = posters[input.value]!;
+    total = numbers.length;
     // Las columnas salen del alto que dejan el título y el pie (1,2 veces el ancho), para que
     // cualquier cantidad de aves quepa en el póster.
-    const columns = Math.ceil(Math.sqrt(species.length / 1.2));
-    poster.style.setProperty('--columns', String(columns));
+    poster.style.setProperty('--columns', String(Math.ceil(Math.sqrt(total / 1.2))));
     poster.style.setProperty('--tint', input.dataset.tint!);
     poster.style.setProperty('--habitat', input.dataset.color!);
     name.textContent = input.dataset.name!;
     place.textContent = input.dataset.place!;
 
+    const images = numbers.map((number) => {
+      const image = document.createElement('img');
+      image.dataset.shadow = `/stickers/shadow/${String(number).padStart(3, '0')}.webp`;
+      image.src = image.dataset.shadow;
+      image.alt = '';
+      image.width = 240;
+      image.height = 240;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      const bird = sample[number];
+      if (bird) {
+        image.dataset.art = `/stickers/160/${bird}.webp`;
+        new Image().src = image.dataset.art;
+      }
+      return image;
+    });
     grid.replaceChildren(
-      ...species.map((bird) => {
+      ...images.map((image) => {
         const item = document.createElement('li');
-        const image = document.createElement('img');
-        image.src = `/stickers/160/${bird.dataset.bird}.webp`;
-        image.alt = '';
-        image.width = 160;
-        image.height = 160;
-        image.loading = 'lazy';
-        image.decoding = 'async';
         item.append(image);
         return item;
       }),
     );
-    // Se llena salteado, como un álbum de verdad.
-    fillOrder = gsap.utils.shuffle([...grid.children] as HTMLElement[]);
-    range.max = String(species.length);
-    range.value = String(Math.round(species.length / 3));
+
+    fillable = gsap.utils.shuffle(images.filter((image) => image.dataset.art));
+    range.max = String(fillable.length);
+    range.value = String(Math.ceil(fillable.length / 2));
     paintProgress();
   }
 

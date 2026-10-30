@@ -8,66 +8,14 @@
     margin-top: 1.25rem;
   }
 
-  .album__count {
-    margin-top: 1rem;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--primary);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .album__filters {
-    display: grid;
-    gap: 0.5rem;
-    margin-top: 1.75rem;
-  }
-
-  .album__search input,
-  .album__select select {
-    width: 100%;
-    min-height: 3rem;
-    padding: 0 0.875rem;
-    border: 1.5px solid var(--edge);
-    border-radius: 0.75rem;
-    background: var(--page);
-    color: var(--ink);
-    font-size: 1rem;
-  }
-
-  .album__search input::placeholder {
-    color: var(--ink-2);
-  }
-
-  .album__results {
-    min-height: 1.5em;
-    margin-top: 0.75rem;
-    color: var(--ink-2);
-  }
-
   .album__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(7.25rem, 1fr));
-    gap: 0.875rem 0.75rem;
-    margin-top: 0.5rem;
-  }
-
-  /* Sin filtros se muestra una muestra corta; el resto no se pinta hasta abrirlo. */
-  .js .album__grid[data-collapsed] li:nth-child(n + 25) {
-    display: none;
-  }
-
-  .album__grid li {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 12rem;
-  }
-
-  .album__grid li[hidden] {
-    display: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.625rem 0.5rem;
+    margin-top: 2rem;
   }
 
   .album__bird {
-    position: relative;
     display: block;
     width: 100%;
     border-radius: 0.875rem;
@@ -79,42 +27,31 @@
     transform: translateY(-3px) rotate(-1.5deg);
   }
 
-  .album__mark {
-    position: absolute;
-    right: -0.25rem;
-    top: -0.25rem;
-    display: none;
-    width: 1.625rem;
-    height: 1.625rem;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    background: var(--sun);
-  }
-
-  .album__mark::after {
-    content: '';
-    position: absolute;
-    left: 0.4375rem;
-    top: 0.1875rem;
-    width: 0.4375rem;
-    height: 0.75rem;
-    border: solid #2d2e16;
-    border-width: 0 2.5px 2.5px 0;
-    transform: rotate(45deg);
-  }
-
-  .album__bird[data-seen] .album__mark {
-    display: block;
-  }
-
-  .album__more {
+  /* La última casilla, con la forma del sticker: lo que falta se consigue en la app. */
+  .album__locked {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin-top: 2rem;
+    aspect-ratio: 160 / 205;
+    border-radius: 0.875rem;
+    background: var(--primary);
+    color: var(--on-primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-align: center;
+    transition: transform 0.15s ease;
   }
 
-  .album__more[hidden] {
-    display: none;
+  .album__locked strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.625rem, 6vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.05;
+  }
+
+  .album__locked:hover {
+    transform: translateY(-3px) rotate(-1.5deg);
   }
 
   .bird-dialog {
@@ -215,17 +152,25 @@
   }
 
   @media (min-width: 40rem) {
-    .album__filters {
-      grid-template-columns: minmax(0, 1fr) 13rem 10rem;
+    .album__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem 1rem;
     }
 
     .bird-dialog[open] {
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     }
+  }
 
+  @media (min-width: 60rem) {
     .album__grid {
-      grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr));
-      gap: 1.25rem 1rem;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 90rem) {
+    .album__grid {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
     }
   }
 }

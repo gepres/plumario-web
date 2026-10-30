@@ -81,7 +81,7 @@
   }
 
   .sticker--empty .sticker__plate img {
-    filter: brightness(0) opacity(0.17);
+    opacity: 0.17;
   }
 
   .sticker--empty .sticker__number {
@@ -94,7 +94,8 @@
   }
 
   :root[data-theme='dark'] .sticker--empty .sticker__plate img {
-    filter: brightness(0) invert(1) opacity(0.3);
+    filter: invert(1);
+    opacity: 0.3;
   }
 
   :root[data-theme='dark'] .sticker--empty .sticker__number {
@@ -103,7 +104,8 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) .sticker--empty .sticker__plate img {
-      filter: brightness(0) invert(1) opacity(0.3);
+      filter: invert(1);
+      opacity: 0.3;
     }
 
     :root:not([data-theme='light']) .sticker--empty .sticker__number {

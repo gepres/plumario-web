@@ -1,7 +1,6 @@
 import { Draggable } from 'gsap/Draggable';
 import { Flip } from 'gsap/Flip';
 
-import { setSeen } from './album-store';
 import { gsap, reducedMotion } from './motion';
 
 gsap.registerPlugin(Draggable, Flip);
@@ -110,7 +109,6 @@ function setUpHero(root: HTMLElement) {
       onComplete: () => burst(slot),
     });
 
-    setSeen(sticker.dataset.sticker!, true);
     updateAfterPaste();
     if (focused) stickers.find((candidate) => !pasted.has(candidate))?.focus();
   }

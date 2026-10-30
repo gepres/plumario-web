@@ -32,6 +32,8 @@ const STARS: Record<Category, [number, number, number][]> = {
 };
 
 const unit = (value: number) => `${(value * 0.625).toFixed(3)}cqw`;
+// En sombra se usa la silueta: las ilustraciones de las aves bloqueadas no se publican.
+const image = empty ? `/stickers/shadow/${albumNumber(bird.number)}.webp` : `/stickers/${resolution}/${bird.id}.webp`;
 ---
 
 <span
@@ -42,7 +44,7 @@ const unit = (value: number) => `${(value * 0.625).toFixed(3)}cqw`;
   <span class="sticker__card">
     <span class="sticker__plate">
       <img
-        src={`/stickers/${resolution}/${bird.id}.webp`}
+        src={image}
         alt=""
         width={resolution}
         height={resolution}
