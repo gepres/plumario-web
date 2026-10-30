@@ -25,6 +25,7 @@ const closing = [
         <button type="submit" class="waitlist__submit">Avísame cuando salga</button>
       </div>
       <p id="waitlist-message" class="waitlist__message" role="status" data-waitlist-message>Solo lo usaremos para avisarte del lanzamiento.</p>
+      <p class="waitlist__legal">Al apuntarte aceptas la <a href="/privacidad/">política de privacidad</a>.</p>
     </form>
   </div>
 
@@ -126,6 +127,19 @@ const closing = [
     min-height: 1.5em;
     margin-top: 0.625rem;
     color: #e0eed0;
+  }
+
+  .waitlist__legal {
+    margin-top: 0.25rem;
+    color: #e0eed0;
+    font-size: 0.9375rem;
+  }
+
+  .waitlist__legal a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .waitlist__stickers {

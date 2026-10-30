@@ -1,0 +1,119 @@
+---
+import { CONTACT_EMAIL, THREATENED_BIRDS } from '../data/site';
+import Legal from '../layouts/Legal.astro';
+
+// Describe lo que hace la app hoy (firestore.rules, functions/src/accounts.ts, policy.tsx). Si cambia
+// lo que se guarda o quién lo ve, este texto cambia en el mismo momento.
+---
+
+<Legal
+  title="Política de privacidad de Plumario"
+  description="Qué datos trata la app Plumario, para qué, con quién se comparten y cómo ejercer tus derechos."
+  heading="Política de privacidad"
+>
+  <p>
+    Esta política explica qué datos trata <strong>Plumario</strong>, el álbum de aves de Ica para Android e iOS, y su web
+    plumario.netlify.app. Se aplica la Ley 29733 de Protección de Datos Personales del Perú y su reglamento.
+  </p>
+
+  <h2>1. Responsable y contacto</h2>
+  <p>El responsable de tus datos es Plumario. Para cualquier consulta sobre privacidad, escribe a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+
+  <h2>2. Qué datos tratamos en la app</h2>
+  <ul>
+    <li><strong>Cuenta:</strong> nombre, @usuario y correo. La contraseña la gestiona Firebase Authentication y nadie de Plumario puede leerla.</li>
+    <li><strong>Fotos:</strong> las fotos de aves que registras, con su fecha.</li>
+    <li><strong>Ubicación, solo si la activas:</strong> la que trae la foto y el lugar que escribas. La app no usa el GPS del teléfono. En las {THREATENED_BIRDS} aves amenazadas no se guarda nunca.</li>
+    <li><strong>Tu álbum:</strong> registros, stickers, cromos, medallas, pósteres, región y ave favorita.</li>
+    <li><strong>Intercambios:</strong> tu @usuario y los cromos que ofreces y pides.</li>
+    <li><strong>Comentarios:</strong> lo que nos envías, la captura si la adjuntas, la versión de la app, tu tipo de teléfono y tu correo si pides respuesta.</li>
+    <li><strong>Avisos:</strong> el identificador de tu teléfono para las notificaciones y qué avisos quieres recibir.</li>
+    <li><strong>Datos técnicos:</strong> el número diario de consultas a la IA, los informes de fallos y una prueba de que la app es auténtica.</li>
+  </ul>
+  <p>La app no muestra publicidad y no incluye herramientas de analítica publicitaria. No vendemos tus datos.</p>
+
+  <h2>3. Qué datos tratamos en la web</h2>
+  <ul>
+    <li><strong>Lista de espera:</strong> tu correo, junto con la dirección IP, el navegador y la página de origen que registra el formulario.</li>
+    <li><strong>Preferencias:</strong> el tema claro u oscuro se guarda solo en tu navegador.</li>
+  </ul>
+  <p>La web no usa cookies de publicidad ni de analítica.</p>
+
+  <h2>4. Para qué los usamos</h2>
+  <ul>
+    <li>Crear tu cuenta y mantener tu álbum.</li>
+    <li>Reconocer la especie, validar tus fotos y otorgar stickers, cromos, medallas y pósteres.</li>
+    <li>Hacer posibles los intercambios entre personas.</li>
+    <li>Enviarte los avisos que elijas y responder tus comentarios.</li>
+    <li>Corregir fallos, proteger el servicio y evitar abusos.</li>
+    <li>Avisarte del lanzamiento, si te apuntaste a la lista de espera.</li>
+  </ul>
+  <p>Tratamos estos datos porque los necesitamos para darte el servicio que pides y porque nos das tu consentimiento al registrarte o al apuntarte.</p>
+
+  <h2>5. Permisos del teléfono</h2>
+  <ul>
+    <li><strong>Cámara:</strong> para fotografiar aves y leer el código de un intercambio.</li>
+    <li><strong>Fotos:</strong> para elegir una foto de tu galería y guardar tus pósteres.</li>
+    <li><strong>Notificaciones:</strong> para los avisos que elijas.</li>
+  </ul>
+  <p>Puedes quitar estos permisos en los ajustes del teléfono. La función que los usa dejará de estar disponible.</p>
+
+  <h2>6. La inteligencia artificial</h2>
+  <p>
+    Para sugerir la especie y validar cada registro, tu foto se envía a Gemini, el servicio de IA de Google. Hoy Plumario
+    no usa tus fotos para entrenar modelos. Google las trata según las condiciones de su servicio, que en algunos planes
+    le permiten usarlas para mejorar sus productos y revisarlas con personas. Por eso te pedimos fotografiar aves, no
+    personas ni información privada.
+  </p>
+  <p>Las sugerencias de la IA pueden equivocarse. Siempre puedes elegir la especie a mano.</p>
+
+  <h2>7. Quién ve tus datos</h2>
+  <ul>
+    <li>Tus fotos y su ubicación solo las ves tú, también al intercambiar.</li>
+    <li>En un intercambio, la otra persona ve tu @usuario y los cromos.</li>
+    <li>En los pósteres y tarjetas que decidas compartir aparece tu nombre o tu @usuario, según lo elijas en Privacidad.</li>
+  </ul>
+
+  <h2>8. Proveedores y transferencia internacional</h2>
+  <p>Usamos estos proveedores, que tratan los datos por encargo nuestro:</p>
+  <ul>
+    <li><strong>Google:</strong> Firebase para cuentas, base de datos, almacenamiento, funciones, notificaciones e informes de fallos, y Gemini para la IA. Android usa Play Integrity para comprobar que la app es auténtica. Los datos están en servidores de Chile, Brasil y Estados Unidos.</li>
+    <li><strong>Apple:</strong> en iPhone, la entrega de notificaciones y la comprobación de la app.</li>
+    <li><strong>Netlify:</strong> aloja la web y guarda la lista de espera, con un filtro automático de spam. Opera principalmente en Estados Unidos.</li>
+  </ul>
+  <p>Al usar Plumario, tus datos pueden tratarse fuera del Perú con estos proveedores.</p>
+
+  <h2>9. Cuánto tiempo los conservamos</h2>
+  <ul>
+    <li><strong>Datos de tu cuenta:</strong> mientras la tengas. Al eliminarla se borran tu perfil, tu @usuario, tus registros, tus fotos, tus stickers, tus medallas y tus pósteres, y se cancelan tus propuestas abiertas.</li>
+    <li><strong>Comentarios:</strong> se conservan aunque elimines tu cuenta, para dar seguimiento a lo reportado. Puedes pedir que los borremos.</li>
+    <li><strong>Intercambios cerrados:</strong> pueden conservar el @usuario que tenías entonces, para mantener el registro del intercambio. Puedes pedir que lo quitemos.</li>
+    <li><strong>Informes de fallos:</strong> Firebase Crashlytics los conserva 90 días.</li>
+    <li><strong>Lista de espera:</strong> hasta avisarte del lanzamiento o hasta que pidas borrar tu correo.</li>
+  </ul>
+
+  <h2>10. Tus derechos</h2>
+  <p>Puedes acceder a tus datos, corregirlos, cancelarlos, oponerte a su uso y pedir una copia. Tienes estas opciones:</p>
+  <ul>
+    <li>Corrige tu perfil en la app, en Perfil.</li>
+    <li>Descarga tus datos en Perfil, Privacidad, Descargar tus datos.</li>
+    <li><a href="/eliminar-cuenta/">Elimina tu cuenta</a> desde la app o desde la web.</li>
+    <li>Escribe a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> para cualquier otro pedido.</li>
+  </ul>
+  <p>Respondemos en un máximo de 10 días hábiles. Si no quedas conforme, puedes acudir a la Autoridad Nacional de Protección de Datos Personales del Perú.</p>
+
+  <h2>11. Menores de edad</h2>
+  <p>
+    Para crear una cuenta debes tener 14 años o más, o contar con el permiso de tu madre, padre o tutor. Si eres responsable
+    de un menor de 14 años que creó una cuenta sin permiso, escríbenos y la eliminaremos.
+  </p>
+
+  <h2>12. Seguridad</h2>
+  <p>
+    Los datos viajan cifrados y las reglas de acceso impiden que una persona lea los datos de otra. Ningún sistema es
+    infalible. Si detectamos un incidente que te afecte, te avisaremos.
+  </p>
+
+  <h2>13. Cambios en esta política</h2>
+  <p>Si cambiamos esta política, actualizaremos la fecha de arriba y te avisaremos en la app cuando el cambio sea importante.</p>
+</Legal>

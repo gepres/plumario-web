@@ -1,11 +1,13 @@
 ---
 import Logo from './Logo.astro';
 
+// Fuera de la portada, los enlaces vuelven a ella antes de saltar a la sección.
+const home = Astro.url.pathname === '/' ? '' : '/';
 const links = [
-  { href: '#como-funciona', label: 'Cómo funciona' },
-  { href: '#cromos', label: 'Cromos' },
-  { href: '#habitats', label: 'Hábitats' },
-  { href: '#album', label: 'Las aves' },
+  { href: `${home}#como-funciona`, label: 'Cómo funciona' },
+  { href: `${home}#cromos`, label: 'Cromos' },
+  { href: `${home}#habitats`, label: 'Hábitats' },
+  { href: `${home}#album`, label: 'Las aves' },
 ];
 ---
 
@@ -25,7 +27,7 @@ const links = [
         <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" stroke="none"></path>
       </svg>
     </button>
-    <a class="button button--small" href="#lista">Avísame</a>
+    <a class="button button--small" href={`${home}#lista`}>Avísame</a>
   </div>
 </header>
 

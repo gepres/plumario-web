@@ -1,0 +1,45 @@
+---
+import { CONTACT_EMAIL } from '../data/site';
+import Legal from '../layouts/Legal.astro';
+
+const request = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Eliminar mi cuenta de Plumario')}&body=${encodeURIComponent('Quiero eliminar mi cuenta de Plumario.\n\nMi @usuario es: ')}`;
+---
+
+<Legal
+  title="Eliminar tu cuenta de Plumario"
+  description="Cómo eliminar tu cuenta de Plumario desde la app o sin instalarla, y qué datos se borran."
+  heading="Eliminar tu cuenta de Plumario"
+>
+  <p>Puedes eliminar tu cuenta de la app Plumario y sus datos cuando quieras. Elimínala de una de estas dos formas.</p>
+
+  <h2>Desde la app</h2>
+  <ul>
+    <li>Abre Plumario y entra a Perfil.</li>
+    <li>Toca Privacidad.</li>
+    <li>Toca Eliminar tu cuenta y confirma con tu contraseña.</li>
+  </ul>
+
+  <h2>Sin la app</h2>
+  <p>
+    <a href={request}>Escríbenos a {CONTACT_EMAIL}</a> desde el correo de tu cuenta, con el asunto «Eliminar mi cuenta de
+    Plumario» y tu @usuario. Comprobaremos que la cuenta es tuya y la eliminaremos en un máximo de 10 días hábiles. No hace
+    falta instalar la app.
+  </p>
+
+  <h2>Qué se borra</h2>
+  <ul>
+    <li>Tu perfil, tu nombre, tu correo y tu @usuario.</li>
+    <li>Tus registros y tus fotos, con su fecha y ubicación.</li>
+    <li>Tus stickers, cromos, medallas y pósteres.</li>
+    <li>Tus preferencias y el identificador de tu teléfono para los avisos.</li>
+  </ul>
+  <p>Tus propuestas de intercambio abiertas se cancelan. La eliminación no se puede deshacer. Descarga tus datos antes si quieres conservar una copia.</p>
+
+  <h2>Qué puede quedar</h2>
+  <ul>
+    <li><strong>Comentarios que enviaste:</strong> se conservan para dar seguimiento a lo reportado, hasta que pidas borrarlos.</li>
+    <li><strong>Intercambios cerrados:</strong> pueden conservar tu antiguo @usuario, hasta que pidas quitarlo.</li>
+    <li><strong>Informes de fallos:</strong> Firebase Crashlytics los conserva 90 días.</li>
+  </ul>
+  <p>Para pedir que borremos también lo anterior, indícalo en tu correo. Más detalles en la <a href="/privacidad/">política de privacidad</a>.</p>
+</Legal>

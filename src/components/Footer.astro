@@ -1,25 +1,39 @@
 ---
+import { CONTACT_EMAIL } from '../data/site';
 import Logo from './Logo.astro';
 ---
 
 <footer class="site-footer">
-  <a href="/" class="site-footer__brand">
-    <Logo class="h-8 w-auto" />
-    <span>Plumario</span>
-  </a>
+  <div class="site-footer__top">
+    <a href="/" class="site-footer__brand">
+      <Logo class="h-8 w-auto" />
+      <span translate="no">Plumario</span>
+    </a>
+    <nav aria-label="Información legal" class="site-footer__links">
+      <a href="/privacidad/">Privacidad</a>
+      <a href="/terminos/">Términos</a>
+      <a href="/eliminar-cuenta/">Eliminar cuenta</a>
+    </nav>
+  </div>
+  <p>Contacto: <a class="site-footer__email" href={`mailto:${CONTACT_EMAIL}`} translate="no">{CONTACT_EMAIL}</a></p>
   <p>Álbum de aves del Perú, edición Ica. Ilustraciones de Plumario; categorías de conservación de la UICN.</p>
 </footer>
 
 <style>
   .site-footer {
+    display: grid;
+    gap: 0.625rem;
+    padding: 1.75rem var(--gutter);
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+  }
+
+  .site-footer__top {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem 2rem;
-    padding: 1.75rem var(--gutter);
-    color: var(--ink-2);
-    font-size: 0.9375rem;
   }
 
   .site-footer__brand {
@@ -30,5 +44,28 @@ import Logo from './Logo.astro';
     font-weight: 800;
     font-size: 1.125rem;
     color: var(--ink);
+  }
+
+  .site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    font-weight: 700;
+  }
+
+  .site-footer__links a {
+    padding-block: 0.5rem;
+  }
+
+  .site-footer__links a:hover,
+  .site-footer__email:hover {
+    color: var(--ink);
+  }
+
+  .site-footer__email {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>

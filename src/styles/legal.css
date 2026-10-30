@@ -1,0 +1,59 @@
+/* Los textos legales: una sola columna de lectura, sin adornos. */
+@layer components {
+  .legal {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding: 2rem var(--gutter) 4rem;
+    line-height: 1.6;
+  }
+
+  .legal h1 {
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+  }
+
+  .legal__updated {
+    margin-top: 0.75rem;
+    color: var(--ink-2);
+  }
+
+  .legal h2 {
+    margin-top: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .legal p {
+    margin-top: 0.75rem;
+  }
+
+  .legal ul {
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .legal li {
+    margin-top: 0.375rem;
+  }
+
+  .legal a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+  }
+
+  .legal a:hover {
+    color: var(--ink);
+  }
+
+  .legal strong {
+    font-weight: 700;
+  }
+}

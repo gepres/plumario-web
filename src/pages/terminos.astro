@@ -1,0 +1,107 @@
+---
+import { CONTACT_EMAIL } from '../data/site';
+import Legal from '../layouts/Legal.astro';
+---
+
+<Legal
+  title="Términos y condiciones de Plumario"
+  description="Las condiciones para usar Plumario: tu cuenta, tus fotos, los cromos, los intercambios y la observación responsable de aves."
+  heading="Términos y condiciones"
+>
+  <p>
+    Estos términos regulan el uso de <strong>Plumario</strong>, el álbum de aves de Ica para Android e iOS. Al crear una
+    cuenta y marcar la casilla de aceptación, los aceptas. Si no estás de acuerdo, no uses la app.
+  </p>
+
+  <h2>1. Qué es Plumario</h2>
+  <p>
+    Plumario es un álbum digital. Registras las aves que ves con una foto, la IA te ayuda a identificarlas y ganas stickers,
+    cromos, medallas y pósteres. Es un servicio de entretenimiento y aprendizaje, no una herramienta científica.
+  </p>
+
+  <h2>2. Tu cuenta</h2>
+  <ul>
+    <li>Debes tener 14 años o más, o contar con el permiso de tu madre, padre o tutor.</li>
+    <li>Usa datos reales y cuida tu contraseña. Lo que se haga con tu cuenta es tu responsabilidad.</li>
+    <li>Tu @usuario no puede ser ofensivo, suplantar a otra persona ni infringir derechos de terceros.</li>
+  </ul>
+
+  <h2>3. Cómo debes usar la app</h2>
+  <p>No está permitido:</p>
+  <ul>
+    <li>Subir fotos que no sean de aves, ni contenido ilegal, violento, sexual, de odio o que exponga a otras personas.</li>
+    <li>Registrar fotos ajenas o manipular la app para conseguir recompensas.</li>
+    <li>Acosar, engañar o presionar a otras personas en los intercambios.</li>
+    <li>Atacar el servicio, usar programas automáticos o copiar el contenido de forma masiva.</li>
+  </ul>
+
+  <h2>4. Observa con cuidado</h2>
+  <p>Ninguna foto vale más que el ave. Al salir a observar:</p>
+  <ul>
+    <li>Mantén la distancia. Si el ave deja de hacer lo que hacía por tu culpa, estás muy cerca.</li>
+    <li>No las persigas, no las alimentes y no toques nidos ni huevos.</li>
+    <li>Respeta las normas de las áreas protegidas, como la Reserva Nacional de Paracas, y las propiedades privadas.</li>
+    <li>Cuida tu seguridad. Sales a observar por tu cuenta y bajo tu responsabilidad.</li>
+    <li>Si encuentras un ave herida o atrapada, no la toques. Avisa a SERFOR o a la autoridad local.</li>
+  </ul>
+
+  <h2>5. Tus fotos</h2>
+  <p>
+    Tus fotos son tuyas. Al subirlas, nos autorizas a guardarlas y procesarlas solo para darte el servicio, incluido el envío
+    a los proveedores de IA que se describen en la <a href="/privacidad/">política de privacidad</a>. Debes tener derecho a
+    usar cada foto que subas.
+  </p>
+
+  <h2>6. La inteligencia artificial</h2>
+  <p>
+    Las sugerencias y validaciones de la IA pueden equivocarse o rechazar una foto correcta. No las uses para decisiones de
+    investigación, salud o seguridad. Si la IA no reconoce tu foto, puedes volver a intentarlo o elegir la especie a mano.
+  </p>
+
+  <h2>7. Stickers, cromos e intercambios</h2>
+  <ul>
+    <li>Un sticker se completa con tu primera foto validada de la especie.</li>
+    <li>El cromo sale 1 de cada 8 veces al completar un sticker. También se consigue con 5 fotos validadas o en un intercambio.</li>
+    <li>Los stickers, cromos, medallas y pósteres no tienen valor en dinero, no son canjeables y no pueden venderse.</li>
+    <li>Un intercambio aceptado no se puede revertir. Revisa la propuesta antes de confirmar.</li>
+    <li>Podemos ajustar las reglas del juego para mantenerlo justo o corregir errores.</li>
+  </ul>
+
+  <h2>8. Pagos</h2>
+  <p>Esta versión de Plumario no incluye compras ni pagos. Si eso cambia, lo informaremos antes y actualizaremos estos términos.</p>
+
+  <h2>9. Contenido de Plumario</h2>
+  <p>
+    La marca, las ilustraciones, los diseños y el software pertenecen a Plumario o se usan con autorización. Puedes usar la
+    app, y descargar, imprimir y compartir tus pósteres para uso personal. No puedes venderlos ni copiar el contenido para
+    otros fines sin permiso.
+  </p>
+
+  <h2>10. Disponibilidad</h2>
+  <p>
+    Hacemos lo posible para que Plumario funcione bien, pero puede tener fallos o interrupciones. Las especies, los datos de
+    conservación y las funciones pueden cambiar. Descarga tus datos si quieres conservar una copia.
+  </p>
+
+  <h2>11. Suspensión y baja</h2>
+  <p>
+    Puedes <a href="/eliminar-cuenta/">eliminar tu cuenta</a> cuando quieras. Podemos suspender o cerrar una cuenta que
+    incumpla estos términos. Si lo hacemos, te lo informaremos, salvo que la ley lo impida.
+  </p>
+
+  <h2>12. Responsabilidad</h2>
+  <p>
+    Respondemos por el servicio según la ley. No respondemos por daños causados por un uso contrario a estos términos, por
+    actividades de observación en el exterior ni por fallos ajenos a nuestro control. Nada en estos términos limita los
+    derechos que te reconoce el Código de Protección y Defensa del Consumidor del Perú.
+  </p>
+
+  <h2>13. Cambios en estos términos</h2>
+  <p>Si cambiamos estos términos, actualizaremos la fecha de arriba y te avisaremos en la app cuando el cambio sea importante.</p>
+
+  <h2>14. Ley aplicable y contacto</h2>
+  <p>
+    Estos términos se rigen por las leyes del Perú. Para reportar un @usuario o cualquier problema, o si tienes una consulta,
+    escribe a <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+  </p>
+</Legal>

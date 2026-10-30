@@ -7,6 +7,6 @@ export default defineConfig({
   devToolbar: { enabled: false },
   // El CSS va dentro del HTML: en móvil evita un viaje de red antes del primer pintado.
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/gracias/') })],
   vite: { plugins: [tailwindcss()] },
 });

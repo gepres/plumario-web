@@ -10,6 +10,7 @@
 @import './chromes.css';
 @import './habitats.css';
 @import './album.css';
+@import './legal.css';
 
 /* Paleta F · Ribera (design/palettes/palettes.json de plumario-app), clara y oscura. */
 :root {

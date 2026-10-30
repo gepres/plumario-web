@@ -16,6 +16,9 @@ export type Bird = {
   threatened: boolean;
 };
 
+export const CONTACT_EMAIL = 'genaropretill@gmail.com';
+export const LEGAL_UPDATED = '30 de octubre de 2026';
+
 export const birds = birdsJson as Bird[];
 export const TOTAL_BIRDS = birds.length;
 export const THREATENED_BIRDS = birds.filter((bird) => bird.threatened).length;

@@ -31,6 +31,11 @@ pnpm content:sync   # trae catálogo e ilustraciones desde ../plumario-app
   app con las ilustraciones reales.
 - **Imagen para compartir:** `node scripts/make-og.mjs`, con `pnpm dev` corriendo en el puerto 4329.
 
+- **Textos legales:** `src/pages/privacidad.astro`, `terminos.astro` y `eliminar-cuenta.astro`. Google
+  Play pide los enlaces de privacidad y eliminación de cuenta. Describen lo que la app hace hoy: si
+  cambia lo que guarda o quién lo ve, se actualizan a la vez, junto con `LEGAL_UPDATED` en
+  `src/data/site.ts` y el formulario de seguridad de los datos de Play Console.
+
 ## Reglas
 
 - La web solo promete lo que la app hace; las cifras salen del catálogo.
