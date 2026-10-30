@@ -1,4 +1,10 @@
 /* Las pantallas miden 390 × 844 como en el diseño: --u es 1 px del diseño a la escala del teléfono. */
+@property --phone-w {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
 @layer components {
   .how__stage {
     display: grid;
@@ -75,15 +81,13 @@
   }
 
   .js .how__steps {
-    position: relative;
     margin-top: 0.75rem;
-    min-height: 7.25rem;
   }
 
-  /* En móvil se ve un paso a la vez bajo el título; los demás siguen disponibles para lectores. */
+  /* En móvil se ve un paso a la vez bajo el título; los demás siguen disponibles para lectores.
+     Comparten celda: así el texto reserva el alto del paso más largo. */
   .js .how__step {
-    position: absolute;
-    inset: 0 0 auto;
+    grid-area: 1 / 1;
     opacity: 0;
     transition: opacity 0.25s ease;
   }
@@ -92,16 +96,19 @@
     opacity: 1;
   }
 
+  /* El teléfono ocupa lo que deja el texto y se escala para caber, sea cual sea la pantalla. */
   .js .phone {
-    --phone-w: min(62vw, 42svh);
-    --u: calc(var(--phone-w) / 390);
-    display: block;
-    width: var(--phone-w);
-    justify-self: center;
-    align-self: end;
+    display: grid;
+    justify-items: center;
+    align-items: end;
+    min-height: 0;
+    container-type: size;
   }
 
   .phone__body {
+    --phone-w: min(100cqw, calc(100cqh * 390 / 864));
+    --u: calc(var(--phone-w) / 390);
+    width: var(--phone-w);
     padding: calc(10 * var(--u));
     border-radius: calc(58 * var(--u));
     background: #1e2a1b;
@@ -527,7 +534,7 @@
     .how__stage,
     .js .how__stage {
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      grid-template-rows: none;
+      grid-template-rows: minmax(0, 1fr);
       align-items: center;
       gap: 3rem;
       padding-block: 1.5rem;
@@ -538,13 +545,12 @@
     }
 
     .js .how__steps {
-      min-height: 0;
       margin-top: 2rem;
       gap: 1.25rem;
     }
 
     .js .how__step {
-      position: static;
+      grid-area: auto;
       opacity: 1;
     }
 
@@ -563,8 +569,24 @@
     }
 
     .js .phone {
-      --phone-w: min(25vw, 41svh);
-      align-self: center;
+      align-self: stretch;
+      align-items: center;
+    }
+  }
+
+  /* Teléfono en horizontal: el alto no alcanza para apilar, así que van lado a lado. */
+  @media (orientation: landscape) and (max-width: 59.99rem) {
+    .js .how__stage {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr);
+      grid-template-rows: minmax(0, 1fr);
+      align-items: center;
+      gap: 1.5rem;
+      padding-block: 0.75rem;
+    }
+
+    .js .phone {
+      align-self: stretch;
+      align-items: center;
     }
   }
 }
