@@ -123,10 +123,8 @@ function setUpHero(root: HTMLElement) {
     return Number.parseFloat(sticker.style.getPropertyValue('--tilt'));
   }
 
-  function overlappedSlot(sticker: HTMLButtonElement) {
-    const box = sticker.getBoundingClientRect();
-    const x = box.left + box.width / 2;
-    const y = box.top + box.height / 2;
+  // Se mira el puntero, no el sticker: al soltar rápido, el sticker va un fotograma atrás.
+  function slotUnderPointer(x: number, y: number) {
     return [...root.querySelectorAll<HTMLElement>('[data-slot]')].find((slot) => {
       const area = slot.getBoundingClientRect();
       return x > area.left && x < area.right && y > area.top && y < area.bottom;
@@ -166,7 +164,7 @@ function setUpHero(root: HTMLElement) {
       },
       onDragEnd() {
         lastDragAt = performance.now();
-        const slot = overlappedSlot(sticker);
+        const slot = slotUnderPointer(this.pointerX - window.scrollX, this.pointerY - window.scrollY);
         if (slot?.dataset.slot === sticker.dataset.sticker) {
           paste(sticker);
         } else {
